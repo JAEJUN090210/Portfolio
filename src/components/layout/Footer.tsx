@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Mail } from 'lucide-react';
 import { siteConfig } from '../../constants/site';
 
 const Shell = styled.footer`

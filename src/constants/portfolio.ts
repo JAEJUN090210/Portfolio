@@ -1,6 +1,10 @@
 import type { AwardItem, ContactLink, ExperienceItem, Project, Skill } from '../types/portfolio';
 import { siteConfig } from './site';
 
+export const pdfProfile = {
+  summary: '세상을 이롭게 만들 수 있는 개발자가 되고 싶은 전재준입니다.',
+} as const;
+
 export const skills: Skill[] = [
   { name: 'React', category: 'Frontend' },
   { name: 'TypeScript', category: 'Frontend' },
@@ -34,31 +38,32 @@ export const projects: Project[] = [
   {
     id: 'entry-dsm-frontend',
     title: 'Entry DSM 입학전형 서비스',
-    summary: '대덕소프트웨어마이스터고등학교의 입학전형 서비스 웹 애플리케이션입니다.',
+    summary:
+      '대덕소프트웨어마이스터고등학교 입학전형 서비스의 프론트엔드 구조와 주요 화면을 개선했습니다.',
     description:
-      'Entry DSM은 대덕소프트웨어마이스터고등학교의 입학전형 서비스로, 지원자들이 쉽게 지원할 수 있는 웹 애플리케이션입니다.',
-    role: '프론트엔드의 전체적인 구조를 설계하고, 개발을 전담하였습니다. 또한 부장을 맡아 프로젝트 전체를 관리하였습니다.',
+      'Entry DSM은 지원자가 입학 전형 절차를 온라인에서 진행할 수 있도록 돕는 웹 서비스입니다.',
+    role: '지원자 접수, 결과 조회, 지원자 확인, 통계 등 입학 전형 흐름에 필요한 화면을 구현하고 상태 관리 구조를 정리했습니다.',
     features: ['원서 접수', '결과 조회', '지원자 확인', '통계'],
     problemSolving:
-      'Entry DSM은 이전 버전에서 발생한 성능 문제와 유지보수의 어려움을 해결하기 위해, 프론트엔드 구조를 개선하고, 상태 관리를 효율적으로 설계하였습니다.',
-    githubUrl: `https://github.com/EntryDSM/EntryDsm-Admission-2026`,
+      '사용자가 전형 절차를 더 쉽게 따라갈 수 있도록 정보 구조를 분명히 하고, 반복되는 UI와 데이터 흐름을 유지보수하기 좋게 다듬었습니다.',
+    githubUrl: 'https://github.com/EntryDSM/EntryDsm-Admission-2026',
     demoUrl: 'https://entrydsm.kr/',
     imageVariant: 'mono',
-    tags: ['React', 'TypeScript', 'Emotion', 'TuroboRepo', 'Vite'],
+    tags: ['React', 'TypeScript', 'Emotion', 'TurboRepo', 'Vite'],
     featured: true,
     year: '2026',
   },
   {
     id: 'Commonly-frontend',
-    title: '유성구청 리빙랩 Commonly',
-    summary: '유성구청 리빙랩의 기간제 근로자 경력관리 시스템 웹 애플리케이션입니다.',
+    title: 'Commonly',
+    summary: '유성구청 리빙랩 프로젝트의 기간제 근로자 경력 관리 서비스 프론트엔드를 개발했습니다.',
     description:
-      'Commonly는 유성구청 리빙랩의 기간제 근로자 경력관리 시스템으로, 근로자들의 근로 내역(경력)을 쉽게 관리할 수 있는 웹 애플리케이션입니다.',
-    role: '팀장을 맡아 프로젝트를 전체적으로 관리하고, 프론트엔드 개발을 일부 담당하였습니다.',
-    features: ['근로내역 등록', '경력증명서 발급'],
+      'Commonly는 기간제 근로자가 자신의 근로 이력과 경력 증명 정보를 웹에서 관리할 수 있도록 돕는 서비스입니다.',
+    role: '근로 이력 등록과 경력 증명서 발급 흐름을 중심으로 화면 구조를 설계하고, 사용자가 필요한 정보를 빠르게 입력하고 확인할 수 있도록 구현했습니다.',
+    features: ['근로 이력 등록', '경력 증명서 발급'],
     problemSolving:
-      '유성구청의 기간제 근로자 경력관리 시스템은 기존에 수기로 관리되던 근로 내역을 디지털화하여, 근로자들이 쉽게 자신의 경력을 관리하고 증명할 수 있도록 하였습니다.',
-    githubUrl: `https://github.com/DSM2026-Commonly/Commonly-fe`,
+      '종이 또는 수기 중심으로 관리되던 경력 정보를 웹에서 일관되게 관리할 수 있는 사용자 경험을 만드는 데 기여했습니다.',
+    githubUrl: 'https://github.com/DSM2026-Commonly/Commonly-fe',
     demoUrl: 'https://github.com/DSM2026-Commonly/Commonly-fe',
     imageVariant: 'studio',
     tags: ['React', 'TypeScript', 'Emotion', 'Vite'],
@@ -67,18 +72,18 @@ export const projects: Project[] = [
   },
   {
     id: 'xquare-infra-v3',
-    title: 'XQUARE 인프라 V3',
-    summary: '교내 배포 플랫폼인 XQUARE 인프라의 웹 서비스입니다.',
+    title: 'XQUARE Infra V3',
+    summary: '교내 프로젝트 배포 플랫폼 XQUARE 인프라 서비스의 프론트엔드 개발에 참여했습니다.',
     description:
-      'XQUARE 인프라 V3는 교내 배포 플랫폼으로, 학생들이 개발한 프로젝트를 쉽게 배포하고 관리할 수 있는 웹 서비스입니다.',
-    role: '프론트엔드의 전체적인 구조를 설계하고, 개발을 전담하였습니다.',
-    features: ['지원자 검색', '상태 필터', '상세 모달', '통계 화면'],
+      'XQUARE Infra V3는 학생 개발자가 교내 프로젝트를 배포하고 관리할 수 있도록 돕는 플랫폼입니다.',
+    role: '서비스 배포와 관리 화면을 개선하고, 프로젝트 목록과 상세 정보 확인 등 운영에 필요한 UI를 구현했습니다.',
+    features: ['프로젝트 배포', '서비스 관리', '상세 정보 확인', '운영 화면'],
     problemSolving:
-      'XQUARE 인프라 V3는 이전 버전에서 발생한 성능 문제와 유지보수의 어려움을 해결하기 위해, 프론트엔드 구조를 개선하고, 상태 관리를 효율적으로 설계하였습니다.',
-    githubUrl: `https://github.com/team-xquare/xquare-infra-frontend-v3`,
+      '학생 개발자가 교내 프로젝트를 더 쉽게 배포하고 관리할 수 있도록 화면 구조와 사용 흐름을 정돈했습니다.',
+    githubUrl: 'https://github.com/team-xquare/xquare-infra-frontend-v3',
     demoUrl: 'https://xquare.dsmhs.kr/',
     imageVariant: 'aurora',
-    tags: ['React', 'TypeScript', 'Emotion', 'Storybook', 'TuroboRepo', 'Vite'],
+    tags: ['React', 'TypeScript', 'Emotion', 'Storybook', 'TurboRepo', 'Vite'],
     featured: true,
     year: '2025-2026',
   },
@@ -86,45 +91,44 @@ export const projects: Project[] = [
 
 export const experiences: ExperienceItem[] = [
   {
-    title: '유성구청 리빙랩 팀장',
-    organization: '대덕소프트웨어마이스터고등학교 유성구청 리빙랩',
-    period: '2026.04~',
+    title: '유성구청 리빙랩 프로젝트 팀장',
+    organization: '대덕소프트웨어마이스터고등학교',
+    period: '2026.04 ~',
     description:
-      '유성구청과 협력하여 지역 문제를 해결하는 리빙랩 프로젝트에서 팀장으로 활동하고 있습니다. 팀원들과 함께 아이디어를 구체화하고, 프로토타입을 개발하며, 지역 사회에 기여하는 경험을 쌓고 있습니다.',
+      '지역 문제 해결을 목표로 한 리빙랩 프로젝트에서 팀장으로 활동하며 기획, 역할 분담, 프론트엔드 개발을 함께 담당하고 있습니다.',
   },
   {
-    title: '전곧동아리 부장',
+    title: '전공 동아리 XQUARE 부장',
     organization: '대덕소프트웨어마이스터고등학교 XQUARE',
-    period: '2026.03~',
+    period: '2026.03 ~',
     description:
-      '전곧동아리에서 부장으로 활동하며, 동아리 운영과 프로젝트 관리를 담당하고 있습니다. 팀원들과 협력하여 다양한 개발 프로젝트를 진행하고 있습니다.',
+      '동아리 운영과 프로젝트 진행을 관리하며 팀원들과 협업해 다양한 개발 과제를 수행하고 있습니다.',
   },
   {
-    title: 'FE Conf 2025',
+    title: 'FE Conf 2025 참가',
     organization: 'Frontend Developers Conference',
     period: '2025.08.23',
     description:
-      'FE Conf 2025에 참가하였습니다. 프론트엔드 개발에 대한 세션을 듣고, 다른 개발자들과 네트워킹했습니다.',
+      '프론트엔드 개발 관련 세션을 듣고 실무 개발자들의 경험과 기술 흐름을 학습했습니다.',
   },
   {
-    title: '교내 해커톤',
+    title: '교내 해커톤 참가',
     organization: '대덕소프트웨어마이스터고등학교',
-    period: '2025.07.14~2025.07.18',
-    description:
-      '교내 해커톤에서 참가하였습니다. 디자인을 담당하며, 팀원들과 협업하여 프로젝트를 완성했습니다.',
+    period: '2025.07.14 ~ 2025.07.18',
+    description: '디자인과 프론트엔드 구현을 담당하며 제한된 시간 안에 팀 프로젝트를 완성했습니다.',
   },
 ];
 
 export const awards: AwardItem[] = [
   {
-    title: '교과 우수상(웹 개발 입문)',
+    title: '웹 개발 입문 교과 우수상',
     issuer: '대덕소프트웨어마이스터고등학교',
     year: '2025',
-    description: '교내 웹 개발 입문 교과에서 받은 상입니다.',
+    description: '교내 웹 개발 입문 교과에서 우수한 평가를 받아 수상했습니다.',
   },
 ];
 
 export const contactLinks: ContactLink[] = [
-  { label: '이메일', href: `mailto:${siteConfig.email}`, value: siteConfig.email },
+  { label: 'Email', href: `mailto:${siteConfig.email}`, value: siteConfig.email },
   { label: 'GitHub', href: siteConfig.githubUrl, value: '@jaejun090210' },
 ];
