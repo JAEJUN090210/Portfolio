@@ -2,6 +2,7 @@ export const siteConfig = {
   name: '전재준',
   role: 'Frontend Developer',
   headline: '세상을 이롭게 만들 수 있는 개발자가 되고 싶은 전재준입니다.',
+  description: '전재준의 포트폴리오 사이트입니다.',
   email: 'jaejun090210@naver.com',
   githubUser: 'jaejun090210',
   githubUrl: 'https://github.com/jaejun090210',
