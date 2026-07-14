@@ -59,6 +59,8 @@ const AboutText = styled.div`
   gap: ${({ theme }) => theme.spacing[4]};
 
   p {
+    font-size: 1.05rem;
+    text-align: justify;
     margin: 0;
     color: ${({ theme }) => theme.colors.textMuted};
     line-height: 1.85;
@@ -161,7 +163,7 @@ export function HomePage() {
         </HeroLayout>
       </Hero>
 
-      <Section id="about" eyebrow="About" title="저는 이런 사람입니다.">
+      <Section id="about" eyebrow="About">
         <AboutText>
           <p>
             저는 다양한 경험을 통해 더 나은 사람이 되고자 노력하는 사람입니다. 개발자로서의 경험을
@@ -170,7 +172,8 @@ export function HomePage() {
             앞으로도 다양한 경험을 통해 더 나은 개발자로 성장해 나가겠습니다.
           </p>
           <p>
-            이를 통해, 저는 세상에 이로운 개발자가 되고자 합니다. 기술을 통해 사람들의 삶을 개선하고, 더 나은 세상을 만드는 데 기여하고 싶습니다.
+            이를 통해, 저는 세상에 이로운 개발자가 되고자 합니다. 기술을 통해 사람들의 삶을
+            개선하고, 더 나은 세상을 만드는 데 기여하고 싶습니다.
           </p>
         </AboutText>
       </Section>
@@ -178,8 +181,8 @@ export function HomePage() {
       <Section
         id="skills"
         eyebrow="Stack"
-        title="이런 기술을 사용합니다."
-        description="주로 사용하는 기술을 정리했습니다."
+        title="기술 스택"
+        description="주로 사용하는 기술입니다"
       >
         <SkillMatrix />
       </Section>
@@ -187,8 +190,8 @@ export function HomePage() {
       <Section
         id="projects"
         eyebrow="Projects"
-        title="이런 프로젝트를 진행했습니다."
-        description="역할, 사용 기술, 해결한 문제를 중심으로 정리했습니다."
+        title="주요 프로젝트"
+        description="최근 참여한 프로젝트 입니다"
       >
         <ProjectGrid>
           {featuredProjects.map((project) => (
@@ -200,13 +203,13 @@ export function HomePage() {
       <Section
         id="github"
         eyebrow="GitHub"
-        title="최근 이러한 작업을 했습니다."
-        description="최근 작업한 저장소를 간단히 확인할 수 있습니다."
+        title="GitHub 최근 작업"
+        description="최근 GitHub에 올린 작업을 확인할 수 있습니다."
       >
         <GitHubPanel />
       </Section>
 
-      <Section id="experience" eyebrow="Experience" title="이런 활동을 했습니다.">
+      <Section id="experience" eyebrow="Experience" title="활동/경험">
         <Timeline>
           {experiences.map((experience) => (
             <TimelineItem key={experience.title}>
@@ -222,10 +225,7 @@ export function HomePage() {
         </Timeline>
       </Section>
 
-      <Section
-        id="contact"
-        title="Contact"
-      >
+      <Section id="contact" title="Contact">
         <Actions>
           <Button type="button" icon={<Copy />} onClick={copyEmail}>
             이메일 복사
