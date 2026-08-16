@@ -204,7 +204,7 @@ export function HomePage() {
         id="github"
         eyebrow="GitHub"
         title="GitHub 최근 작업"
-        description="최근 GitHub에 올린 작업을 확인할 수 있습니다."
+        description="개인 및 조직 저장소에서 진행한 최근 공개 활동을 확인할 수 있습니다."
       >
         <GitHubPanel />
       </Section>

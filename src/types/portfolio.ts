@@ -42,12 +42,40 @@ export type ContactLink = {
   value: string;
 };
 
-export type GithubRepository = {
-  id: number;
-  name: string;
-  html_url: string;
-  description: string | null;
-  language?: string | null;
-  stargazers_count: number;
-  updated_at: string;
+export type GithubEvent = {
+  id: string;
+  type: string;
+  repo: {
+    id: number;
+    name: string;
+  };
+  payload: {
+    action?: string;
+    ref_type?: string;
+  };
+  public: boolean;
+  created_at: string;
+};
+
+export type GithubContributionLevel = 0 | 1 | 2 | 3 | 4;
+
+export type GithubContributionDay = {
+  date: string;
+  count: number;
+  level: GithubContributionLevel;
+};
+
+export type GithubRecentWork = {
+  repositoryId: number;
+  repositoryName: string;
+  repositoryUrl: string;
+  latestActivityAt: string;
+  activityCount: number;
+  activityLabels: string[];
+};
+
+export type GithubActivitySummary = {
+  contributionDays: GithubContributionDay[];
+  recentWork: GithubRecentWork[];
+  totalActivityCount: number;
 };

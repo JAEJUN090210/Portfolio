@@ -91,6 +91,18 @@ export const projects: Project[] = [
 
 export const experiences: ExperienceItem[] = [
   {
+    title: '2026 GEEKs 해커톤 참가',
+    organization: '키키랩',
+    period: '2026.08.04 ~ 2026.08.05',
+    description: '프로젝트의 프론트엔드로 참여하여 웹을 구현하였습니다.',
+  },
+  {
+    title: '2026 교내 해커톤 참가',
+    organization: '대덕소프트웨어마이스터고등학교',
+    period: '2026.07.13 ~ 2026.07.15',
+    description: '프론트엔드의 전반적인 구조와 UI 구현을 담당하며 팀 프로젝트를 완성했습니다.',
+  },
+  {
     title: '유성구청 리빙랩 프로젝트 팀장',
     organization: '대덕소프트웨어마이스터고등학교',
     period: '2026.04 ~',
@@ -116,18 +128,6 @@ export const experiences: ExperienceItem[] = [
     organization: '대덕소프트웨어마이스터고등학교',
     period: '2025.07.14 ~ 2025.07.18',
     description: '디자인과 프론트엔드 구현을 담당하며 제한된 시간 안에 팀 프로젝트를 완성했습니다.',
-  },
-  {
-    title: '2026 교내 해커톤 참가',
-    organization: '대덕소프트웨어마이스터고등학교',
-    period: '2026.07.13 ~ 2026.07.15',
-    description: '프론트엔드의 전반적인 구조와 UI 구현을 담당하며 팀 프로젝트를 완성했습니다.',
-  },
-  {
-    title: '2026 GEEKs 해커톤 참가',
-    organization: '키키랩',
-    period: '2026.08.04 ~ 2026.08.05',
-    description: '프로젝트의 프론트엔드로 참여하여 웹을 구현하였습니다.',
   },
 ];
 
