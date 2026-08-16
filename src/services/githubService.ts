@@ -10,7 +10,6 @@ import type {
 const EVENT_PAGES = [1, 2, 3] as const;
 const EVENTS_PER_PAGE = 100;
 const CONTRIBUTION_DAY_COUNT = 91;
-const DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null;
@@ -83,7 +82,13 @@ const getActivityLabel = (event: GithubEvent): string | null => {
     case 'CommitCommentEvent':
       return '커밋 코멘트';
     case 'CreateEvent':
-      return event.payload.ref_type === 'tag' ? '태그 생성' : '브랜치 생성';
+      return (
+        {
+          repository: '저장소 생성',
+          branch: '브랜치 생성',
+          tag: '태그 생성',
+        }[event.payload.ref_type ?? ''] ?? 'Git 참조 생성'
+      );
     case 'DeleteEvent':
       return event.payload.ref_type === 'tag' ? '태그 삭제' : '브랜치 정리';
     case 'DiscussionEvent':
@@ -130,9 +135,8 @@ const buildContributionDays = (events: GithubEvent[], now: Date): GithubContribu
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
   return Array.from({ length: CONTRIBUTION_DAY_COUNT }, (_, index) => {
-    const date = new Date(
-      today.getTime() - (CONTRIBUTION_DAY_COUNT - index - 1) * DAY_IN_MILLISECONDS,
-    );
+    const date = new Date(today);
+    date.setDate(today.getDate() - (CONTRIBUTION_DAY_COUNT - index - 1));
     const dateKey = toLocalDateKey(date);
     const count = activityByDate.get(dateKey) ?? 0;
 

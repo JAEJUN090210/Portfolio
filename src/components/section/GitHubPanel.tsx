@@ -159,7 +159,8 @@ export function GitHubPanel() {
           <span>최근 공개 활동</span>
           {activity && (
             <strong>
-              {activity.totalActivityCount}건 · {activity.recentWork.length}개 저장소
+              {activity.totalActivityCount}건 · 저장소 {activity.recentWork.length}개 중 최근{' '}
+              {recentWork.length}개
             </strong>
           )}
         </ActivitySummary>
@@ -172,6 +173,7 @@ export function GitHubPanel() {
                 key={day.date}
                 level={day.level}
                 title={`${day.date}: 공개 활동 ${day.count}건`}
+                aria-hidden="true"
               />
             ))}
           </Dots>
