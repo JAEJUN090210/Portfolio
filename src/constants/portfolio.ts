@@ -133,12 +133,6 @@ export const experiences: ExperienceItem[] = [
 
 export const awards: AwardItem[] = [
   {
-    title: '웹 개발 입문 교과 우수상',
-    issuer: '대덕소프트웨어마이스터고등학교',
-    year: '2025',
-    description: '교내 웹 개발 입문 교과에서 우수한 평가를 받아 수상했습니다.',
-  },
-  {
     title: '2026 교내 해커톤 최우수상',
     issuer: '대덕소프트웨어마이스터고등학교',
     year: '2026',
