@@ -1,5 +1,5 @@
 export type SkillCategory =
-  'Frontend' | 'Backend' | 'DevOps' | 'Cloud' | 'Tools' | 'PackageManager';
+  'Frontend' | 'Backend' | 'Server' | 'Cloud' | 'Tools' | 'PackageManager';
 
 export type Skill = {
   name: string;

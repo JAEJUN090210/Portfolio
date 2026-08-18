@@ -3,12 +3,12 @@ import { useMemo } from 'react';
 import { skills } from '../../constants/portfolio';
 import type { SkillCategory } from '../../types/portfolio';
 
-const categories: SkillCategory[] = ['Frontend', 'Backend', 'DevOps', 'Cloud', 'PackageManager', 'Tools'];
+const categories: SkillCategory[] = ['Frontend', 'Backend', 'Server', 'Cloud', 'PackageManager', 'Tools'];
 
 const categoryLabels: Record<SkillCategory, string> = {
   Frontend: '프론트엔드',
   Backend: '백엔드',
-  DevOps: 'DevOps',
+  Server: '서버',
   Cloud: '배포',
   PackageManager: '패키지 매니저',
   Tools: '도구',

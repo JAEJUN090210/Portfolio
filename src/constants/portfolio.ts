@@ -23,12 +23,16 @@ export const skills: Skill[] = [
   { name: 'Swagger', category: 'Tools' },
 
   { name: 'npm', category: 'PackageManager' },
+  { name: 'pnpm', category: 'PackageManager' },
   { name: 'Yarn Berry', category: 'PackageManager' },
   { name: 'Bun', category: 'PackageManager' },
 
-  { name: 'GitHub Actions', category: 'DevOps' },
-  { name: 'Docker', category: 'DevOps' },
-  { name: 'Proxmox VE', category: 'DevOps' },
+  { name: 'GitHub Actions', category: 'Server' },
+  { name: 'Docker', category: 'Server' },
+  { name: 'Proxmox VE', category: 'Server' },
+  { name: 'Argo', category: 'Server' },
+  { name: 'Kubernetes', category: 'Server' },
+  { name: 'Nginx', category: 'Server' },
 
   { name: 'AWS', category: 'Cloud' },
   { name: 'Azure', category: 'Cloud' },

@@ -11,7 +11,7 @@ const skillCategoryOrder: SkillCategory[] = [
   'Backend',
   'Tools',
   'PackageManager',
-  'DevOps',
+  'Server',
   'Cloud',
 ];
 
