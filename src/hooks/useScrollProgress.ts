@@ -1,30 +1,25 @@
 import { useEffect, useState } from 'react';
-import { clamp } from '../utils/format';
 
-export function useScrollProgress() {
-  const [progress, setProgress] = useState(0);
+/** 스크롤 진행도가 threshold(0~1)를 넘었는지만 알려줍니다. 경계를 넘을 때만 리렌더됩니다. */
+export function useScrollPast(threshold: number) {
+  const [past, setPast] = useState(false);
 
   useEffect(() => {
-    let frameId = 0;
-
-    const updateProgress = () => {
-      window.cancelAnimationFrame(frameId);
-      frameId = window.requestAnimationFrame(() => {
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        setProgress(maxScroll <= 0 ? 0 : clamp(window.scrollY / maxScroll, 0, 1));
-      });
+    const check = () => {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll <= 0 ? 0 : window.scrollY / maxScroll;
+      setPast(progress > threshold);
     };
 
-    updateProgress();
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    window.addEventListener('resize', updateProgress);
+    check();
+    window.addEventListener('scroll', check, { passive: true });
+    window.addEventListener('resize', check);
 
     return () => {
-      window.cancelAnimationFrame(frameId);
-      window.removeEventListener('scroll', updateProgress);
-      window.removeEventListener('resize', updateProgress);
+      window.removeEventListener('scroll', check);
+      window.removeEventListener('resize', check);
     };
-  }, []);
+  }, [threshold]);
 
-  return progress;
+  return past;
 }

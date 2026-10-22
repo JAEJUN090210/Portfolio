@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { ArrowUp } from 'lucide-react';
-import { useScrollProgress } from '../../hooks/useScrollProgress';
+import { useScrollPast } from '../../hooks/useScrollProgress';
+import { scrollToTarget } from '../../lib/smoothScroll';
 
 const Button = styled.button<{ visible: boolean }>`
   position: fixed;
@@ -24,8 +25,7 @@ const Button = styled.button<{ visible: boolean }>`
 `;
 
 export function BackToTop() {
-  const progress = useScrollProgress();
-  const visible = progress > 0.2;
+  const visible = useScrollPast(0.2);
 
   return (
     <Button
@@ -33,7 +33,7 @@ export function BackToTop() {
       visible={visible}
       type="button"
       aria-label="Back to top"
-      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      onClick={() => scrollToTarget(0)}
     >
       <ArrowUp size={18} />
     </Button>

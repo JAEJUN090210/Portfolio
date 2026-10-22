@@ -12,6 +12,9 @@ const SkillsPage = lazy(() =>
 const ProjectsPage = lazy(() =>
   import('../pages/ProjectsPage').then((module) => ({ default: module.ProjectsPage })),
 );
+const ProjectDetailPage = lazy(() =>
+  import('../pages/ProjectDetailPage').then((module) => ({ default: module.ProjectDetailPage })),
+);
 const ExperiencePage = lazy(() =>
   import('../pages/ExperiencePage').then((module) => ({ default: module.ExperiencePage })),
 );
@@ -50,6 +53,14 @@ export const router = createBrowserRouter([
         element: (
           <PageShell title="Projects" path="/projects">
             <ProjectsPage />
+          </PageShell>
+        ),
+      },
+      {
+        path: '/projects/:projectId',
+        element: (
+          <PageShell title="Project" path="/projects">
+            <ProjectDetailPage />
           </PageShell>
         ),
       },

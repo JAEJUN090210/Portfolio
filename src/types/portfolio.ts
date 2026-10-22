@@ -6,27 +6,94 @@ export type Skill = {
   category: SkillCategory;
 };
 
+export type SkillGroup = {
+  id: string;
+  title: string;
+  description: string;
+  categories: SkillCategory[];
+};
+
+export type ProjectLink = {
+  label: string;
+  href: string;
+};
+
+export type ProjectSection = {
+  title: string;
+  paragraphs?: string[];
+  bullets?: string[];
+};
+
+/** 주요 기능 한 줄: `label` 은 사용자/영역, `text` 는 기능 설명 */
+export type ProjectFeature = {
+  label: string;
+  text: string;
+};
+
+/** 트러블슈팅 한 건. 있는 항목만 순서대로 보여 줍니다. */
+export type ProjectTroubleshooting = {
+  title: string;
+  situation?: string;
+  problem?: string;
+  cause?: string;
+  solution: string;
+  /** 여러 선택지 중 그 방법을 고른 이유 */
+  decision?: string;
+  result?: string;
+  improvement?: string;
+};
+
+export type ProjectDetail = {
+  intro: string[];
+  /** 프로젝트 목록(아코디언)에 보여 줄 핵심 기여 3~4줄 */
+  highlights: string[];
+  features?: ProjectFeature[];
+  /** 내 역할과 개발 내용 */
+  sections: ProjectSection[];
+  troubleshooting?: ProjectTroubleshooting[];
+  retrospective?: string[];
+};
+
 export type Project = {
   id: string;
   title: string;
   summary: string;
   description: string;
+  /** 한 줄 역할 설명(아코디언) */
   role: string;
-  features: string[];
-  problemSolving: string;
-  githubUrl: string;
-  demoUrl: string;
   imageVariant: 'aurora' | 'mono' | 'studio';
   tags: string[];
-  featured: boolean;
-  year: string;
+  period: string;
+  status: string;
+  team?: string;
+  /** 맡은 포지션 요약. 예) PM · Frontend · 배포 */
+  position?: string;
+  /** 기여도. 예) 커밋 232 / 574 */
+  contribution?: string;
+  /** 운영 규모. 예) 사용자 127명 */
+  scale?: string;
+  /** 협업 방식. 예) GitHub Issue·PR · Notion */
+  collaboration?: string;
+  links: ProjectLink[];
+  images?: string[];
+  detail: ProjectDetail;
 };
 
-export type ExperienceItem = {
-  title: string;
+export type TimelineItem = {
+  id: string;
   organization: string;
+  badge: string;
+  title: string;
+  location?: string;
   period: string;
-  description: string;
+  highlights: string[];
+  stack: string[];
+};
+
+export type ExperienceItem = TimelineItem;
+
+export type EducationItem = TimelineItem & {
+  gpa?: string;
 };
 
 export type AwardItem = {
@@ -36,46 +103,7 @@ export type AwardItem = {
   description: string;
 };
 
-export type ContactLink = {
-  label: string;
-  href: string;
-  value: string;
-};
-
-export type GithubEvent = {
-  id: string;
-  type: string;
-  repo: {
-    id: number;
-    name: string;
-  };
-  payload: {
-    action?: string;
-    ref_type?: string;
-  };
-  public: boolean;
-  created_at: string;
-};
-
-export type GithubContributionLevel = 0 | 1 | 2 | 3 | 4;
-
-export type GithubContributionDay = {
-  date: string;
-  count: number;
-  level: GithubContributionLevel;
-};
-
-export type GithubRecentWork = {
-  repositoryId: number;
-  repositoryName: string;
-  repositoryUrl: string;
-  latestActivityAt: string;
-  activityCount: number;
-  activityLabels: string[];
-};
-
-export type GithubActivitySummary = {
-  contributionDays: GithubContributionDay[];
-  recentWork: GithubRecentWork[];
-  totalActivityCount: number;
+export type IntroSegment = {
+  text: string;
+  strong?: boolean;
 };

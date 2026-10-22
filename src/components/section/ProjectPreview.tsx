@@ -3,66 +3,60 @@ import type { Project } from '../../types/portfolio';
 
 type ProjectPreviewProps = {
   variant: Project['imageVariant'];
+  fill?: boolean;
 };
 
-const Preview = styled.div<{ variant: Project['imageVariant'] }>`
+const Preview = styled.div<{ variant: Project['imageVariant']; $fill: boolean }>`
   position: relative;
-  min-height: 112px;
-  overflow: hidden;
+  min-height: ${({ $fill }) => ($fill ? '100%' : '112px')};
   height: 100%;
-  border-right: 1px solid ${({ theme }) => theme.colors.border};
+  overflow: hidden;
   background: ${({ variant }) =>
     ({
       aurora:
-        'linear-gradient(135deg, rgba(125, 211, 252, 0.28), rgba(245, 193, 108, 0.14)), #101216',
-      mono: 'linear-gradient(135deg, rgba(255,255,255,0.13), rgba(255,255,255,0.03)), #101113',
+        'radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.45), transparent 55%), radial-gradient(circle at 80% 80%, rgba(20, 184, 166, 0.4), transparent 50%), #0f1115',
+      mono: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.16), transparent 55%), linear-gradient(160deg, #1a1a1a, #0b0b0b)',
       studio:
-        'linear-gradient(135deg, rgba(139, 211, 156, 0.22), rgba(125, 211, 252, 0.16)), #101216',
+        'radial-gradient(circle at 70% 30%, rgba(139, 92, 246, 0.42), transparent 55%), radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.35), transparent 50%), #0f1115',
     })[variant]};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}px) {
-    border-right: 0;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-  }
 
   &::before {
     position: absolute;
-    inset: 0.8rem;
+    inset: 0;
     content: '';
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: ${({ theme }) => theme.radii.lg};
     background:
-      linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-    background-size: 22px 22px;
+      linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(circle at center, #000 30%, transparent 85%);
   }
 `;
 
 const Window = styled.div`
   position: absolute;
-  right: 0.9rem;
-  bottom: 0.9rem;
-  width: min(72%, 260px);
+  right: 8%;
+  bottom: 10%;
+  width: min(60%, 420px);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: ${({ theme }) => theme.radii.md};
+  border-radius: ${({ theme }) => theme.radii.lg};
   overflow: hidden;
-  background: rgba(5, 5, 5, 0.78);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+  background: rgba(10, 10, 10, 0.72);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(18px);
 `;
 
 const Chrome = styled.div`
   display: flex;
-  gap: 0.36rem;
+  gap: 0.4rem;
   align-items: center;
-  height: 1.35rem;
+  height: 1.6rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: 0 ${({ theme }) => theme.spacing[3]};
 `;
 
 const Dot = styled.span<{ tone: string }>`
-  width: 0.36rem;
-  height: 0.36rem;
+  width: 0.45rem;
+  height: 0.45rem;
   border-radius: 50%;
   background: ${({ tone }) => tone};
 `;
@@ -70,19 +64,19 @@ const Dot = styled.span<{ tone: string }>`
 const Rows = styled.div`
   display: grid;
   gap: ${({ theme }) => theme.spacing[2]};
-  padding: ${({ theme }) => theme.spacing[3]};
+  padding: ${({ theme }) => theme.spacing[4]};
 `;
 
-const Row = styled.div<{ width: string }>`
-  width: ${({ width }) => width};
-  height: 0.48rem;
+const Row = styled.div<{ $width: string }>`
+  width: ${({ $width }) => $width};
+  height: 0.5rem;
   border-radius: ${({ theme }) => theme.radii.pill};
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.74), rgba(125, 211, 252, 0.44));
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.7), rgba(59, 130, 246, 0.45));
 `;
 
-export function ProjectPreview({ variant }: ProjectPreviewProps) {
+export function ProjectPreview({ variant, fill = false }: ProjectPreviewProps) {
   return (
-    <Preview variant={variant} aria-hidden="true">
+    <Preview variant={variant} $fill={fill} aria-hidden="true">
       <Window>
         <Chrome>
           <Dot tone="#ff8a8a" />
@@ -90,10 +84,10 @@ export function ProjectPreview({ variant }: ProjectPreviewProps) {
           <Dot tone="#8bd39c" />
         </Chrome>
         <Rows>
-          <Row width="74%" />
-          <Row width="92%" />
-          <Row width="48%" />
-          <Row width="82%" />
+          <Row $width="74%" />
+          <Row $width="92%" />
+          <Row $width="48%" />
+          <Row $width="82%" />
         </Rows>
       </Window>
     </Preview>

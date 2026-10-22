@@ -1,18 +1,10 @@
-import { Section } from '../components/ui/Section';
-import { awards } from '../constants/portfolio';
+import { AwardRows } from '../components/section/ExperienceList';
+import { SplitSection } from '../components/ui/SplitSection';
 
 export function AwardsPage() {
   return (
-    <Section id="awards" title="수상 및 발표">
-      {awards.map((award) => (
-        <article key={award.title}>
-          <h3>{award.title}</h3>
-          <p>
-            {award.issuer} · {award.year}
-          </p>
-          <p>{award.description}</p>
-        </article>
-      ))}
-    </Section>
+    <SplitSection id="awards" title="AWARDS">
+      <AwardRows standalone />
+    </SplitSection>
   );
 }
