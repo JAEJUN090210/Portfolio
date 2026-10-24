@@ -22,7 +22,7 @@ export const projects: Project[] = [
     status: '서비스 중',
     team: 'Frontend 3명 · Backend 2명',
     position: 'PM · Frontend(어드민 전담) · 배포',
-    contribution: '커밋 232 / 574 (팀 내 최다)',
+    contribution: '커밋 293 / 650 (팀 내 최다)',
     scale: '모의 원서 접수 지원자 120명',
     collaboration: 'GitHub Issue · PR · CodeRabbit 리뷰 · Notion',
     links: [
