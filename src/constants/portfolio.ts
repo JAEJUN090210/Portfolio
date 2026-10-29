@@ -160,7 +160,7 @@ export const education: EducationItem[] = [
     id: 'dsm',
     organization: '대덕소프트웨어마이스터고등학교',
     badge: '재학',
-    title: '소프트웨어 전공',
+    title: '소프트웨어 개발과',
     location: '대전',
     period: '2025.03 – 현재',
     highlights: [
