@@ -133,7 +133,7 @@ export const experiences: ExperienceItem[] = [
     id: 'feconf-2025',
     organization: 'FE Conf 2025',
     badge: '컨퍼런스',
-    title: 'Frontend Developers Conference 참가',
+    title: 'Frontend Developers Conference 참관',
     location: '서울',
     period: '2025.08.23',
     highlights: [
