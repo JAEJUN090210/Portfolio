@@ -9,6 +9,7 @@ export const projects: Project[] = [
       'Entry DSM은 원서 작성부터 합격자 발표까지 입학 전형 전 과정을 온라인 한 곳에서 처리하는 웹 서비스입니다.',
     role: 'PM과 어드민 앱 개발, 배포를 맡아 2026년 버전을 새 저장소에서 다시 구성했고, 모의 원서 접수부터 실제 서비스로 운영하고 있습니다.',
     imageVariant: 'mono',
+    cover: '/images/projects/entry-dsm.webp',
     tags: [
       'React 19',
       'TypeScript',
@@ -31,7 +32,7 @@ export const projects: Project[] = [
     ],
     detail: {
       intro: [
-        'Entry DSM은 지원자가 원서를 손으로 써서 내고 학교가 이를 수기로 관리하던 대덕소프트웨어마이스터고 입학전형을, **원서 작성부터 합격자 발표까지 온라인 한 곳에서 처리**하려고 만든 서비스입니다.',
+        'Entry DSM은 지원자가 원서를 손으로 써서 내고 학교가 이를 수기로 관리하던 대덕소프트웨어마이스터고 입학전형을, **원서 작성부터 합격자 발표까지 온라인 한 곳에서 처리**하기 위하여 개발한 서비스입니다.',
         '2026년 버전을 맡아 2025년 버전을 이어받지 않고 **새 저장소에서 다시 구성**했고, 2026년 10월 모의 원서 접수부터 실제 서비스로 운영되고 있습니다.',
       ],
       highlights: [
@@ -188,6 +189,7 @@ export const projects: Project[] = [
       'XQUARE Infra V3는 대덕소프트웨어마이스터고 학생들이 자기 프로젝트를 학교 서버에 직접 배포할 수 있게 해 주는 교내 인프라 플랫폼입니다.',
     role: '동아리의 첫 프론트엔드 개발자로 합류해 설계부터 개발까지 맡았고, 부장·PM으로 사용자 127명 규모의 서비스를 운영하고 있습니다.',
     imageVariant: 'aurora',
+    cover: '/images/projects/xquare-infra.webp',
     tags: ['React 19', 'TypeScript', 'Emotion', 'Turborepo', 'Storybook', 'Kubernetes', 'Argo CD'],
     period: '2025.11.20 – 현재',
     status: '서비스 중',
@@ -302,6 +304,7 @@ export const projects: Project[] = [
       'Commonly는 유성구청의 기간제 근로자 경력 관리와 경력증명서 발급 업무를 온라인으로 옮긴 서비스입니다.',
     role: 'PM과 디자인을 전담하고 세 앱의 공통 UI와 화면을 개발했으며, Portainer 기반 배포까지 맡았습니다.',
     imageVariant: 'studio',
+    cover: '/images/projects/commonly.webp',
     tags: ['React 19', 'TypeScript', 'Emotion', 'Turborepo', 'Docker', 'Portainer', 'KRDS'],
     period: '2026.07 – 2026.10',
     status: '개발 완료',

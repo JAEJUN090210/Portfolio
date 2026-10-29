@@ -4,6 +4,7 @@ import { Fragment, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { RichText } from '../components/common/RichText';
 import { SEO } from '../components/common/SEO';
+import { ProjectCover } from '../components/section/ProjectCover';
 import { ProjectPreview } from '../components/section/ProjectPreview';
 import { Scorecard } from '../components/section/Scorecard';
 import { Badge, Tag } from '../components/ui/Tag';
@@ -54,13 +55,14 @@ const Gallery = styled.div`
   }
 `;
 
-const GalleryTitle = styled.div`
+const GalleryTitle = styled.div<{ $shade?: boolean }>`
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
   color: #ffffff;
-  background: rgba(0, 0, 0, 0.45);
+  background: ${({ $shade = true }) => ($shade ? 'rgba(0, 0, 0, 0.45)' : 'transparent')};
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
   font-size: clamp(2.5rem, 7vw, 4.5rem);
   font-weight: 900;
   letter-spacing: -0.03em;
@@ -368,6 +370,16 @@ function ProjectGallery({ project }: { project: Project }) {
   const move = (delta: number) => setIndex((current) => (current + delta + count) % count);
 
   if (count === 0) {
+    if (project.cover) {
+      return (
+        <Gallery>
+          <ProjectCover src={project.cover} alt={`${project.title} 서비스 화면`} eager>
+            <GalleryTitle $shade={false}>{project.title}.</GalleryTitle>
+          </ProjectCover>
+        </Gallery>
+      );
+    }
+
     return (
       <Gallery>
         <ProjectPreview variant={project.imageVariant} fill />

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { projects } from '../../constants/portfolio';
 import type { Project } from '../../types/portfolio';
 import { RichText } from '../common/RichText';
+import { ProjectCover } from './ProjectCover';
 
 const Intro = styled.p`
   margin: 0 0 ${({ theme }) => theme.spacing[8]};
@@ -100,6 +101,45 @@ const PanelBody = styled.div`
 
   @media (min-width: ${({ theme }) => theme.breakpoints.tablet}px) {
     margin-left: 7.5rem;
+  }
+`;
+
+const CoverLink = styled(Link)`
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.radii.lg};
+
+  img {
+    transition: transform 600ms ease;
+  }
+
+  &:hover img {
+    transform: scale(1.03);
+  }
+
+  .label {
+    position: absolute;
+    right: ${({ theme }) => theme.spacing[4]};
+    bottom: ${({ theme }) => theme.spacing[4]};
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: ${({ theme }) => theme.radii.pill};
+    padding: 0.35rem 0.85rem;
+    color: #ffffff;
+    background: rgba(10, 10, 10, 0.55);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    backdrop-filter: blur(12px);
+    transition: background 160ms ease;
+  }
+
+  &:hover .label {
+    background: ${({ theme }) => theme.colors.accent};
   }
 `;
 
@@ -204,6 +244,15 @@ function ProjectRow({ project, defaultOpen }: { project: Project; defaultOpen: b
       <Panel id={panelId} open={open} aria-hidden={!open}>
         <div>
           <PanelBody>
+            {project.cover && (
+              <CoverLink to={`/projects/${project.id}`} aria-label={`${project.title} 상세 보기`}>
+                <ProjectCover src={project.cover} alt={`${project.title} 서비스 화면`} dim={0.4}>
+                  <span className="label" aria-hidden="true">
+                    상세 보기 ↗
+                  </span>
+                </ProjectCover>
+              </CoverLink>
+            )}
             <Field>
               <h4>Role</h4>
               <div>

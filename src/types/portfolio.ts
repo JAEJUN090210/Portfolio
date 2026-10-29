@@ -85,6 +85,8 @@ export type Project = {
   /** 한 줄 역할 설명(아코디언) */
   role: string;
   imageVariant: 'aurora' | 'mono' | 'studio';
+  /** 서비스 대표 이미지 경로. 검은 레이어를 씌워 보여 줍니다. */
+  cover?: string;
   tags: string[];
   period: string;
   status: string;
