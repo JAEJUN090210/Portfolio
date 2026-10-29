@@ -13,7 +13,7 @@ export const siteConfig = {
 
 export const hero = {
   intro: [
-    { text: '배움', strong: true },
+    { text: '경험', strong: true },
     { text: ', ' },
     { text: '도전', strong: true },
     { text: ', 그리고 ' },

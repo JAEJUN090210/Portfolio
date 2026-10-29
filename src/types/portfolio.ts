@@ -43,6 +43,27 @@ export type ProjectTroubleshooting = {
   improvement?: string;
 };
 
+/** 점수 비교 한 항목. `before`/`after` 는 0–100 점수, `display` 가 있으면 숫자 대신 그 문자열을 보여 줍니다. */
+export type ProjectScoreItem = {
+  label: string;
+  before: number;
+  after: number;
+  /** 점수가 아닌 통과 개수처럼 보여 줄 값. 예) ['2/3', '2/3'] */
+  display?: [string, string];
+};
+
+/** 개선 전후 점수 비교 카드 (Lighthouse 등) */
+export type ProjectScorecard = {
+  title: string;
+  /** 카드 위 설명 문단 */
+  description?: string[];
+  /** 두 측정의 조건. 예) ['2026.09.11 · 모바일', '2026.09.12 · 데스크톱'] */
+  conditions: [string, string];
+  items: ProjectScoreItem[];
+  /** 카드 아래 비고 */
+  notes?: string[];
+};
+
 export type ProjectDetail = {
   intro: string[];
   /** 프로젝트 목록(아코디언)에 보여 줄 핵심 기여 3~4줄 */
@@ -50,6 +71,8 @@ export type ProjectDetail = {
   features?: ProjectFeature[];
   /** 내 역할과 개발 내용 */
   sections: ProjectSection[];
+  /** 개선 전후 점수 비교 */
+  scorecard?: ProjectScorecard;
   troubleshooting?: ProjectTroubleshooting[];
   retrospective?: string[];
 };

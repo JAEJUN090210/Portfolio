@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { RichText } from '../components/common/RichText';
 import { SEO } from '../components/common/SEO';
 import { ProjectPreview } from '../components/section/ProjectPreview';
+import { Scorecard } from '../components/section/Scorecard';
 import { Badge, Tag } from '../components/ui/Tag';
 import { projects } from '../constants/portfolio';
 import type { Project, ProjectTroubleshooting } from '../types/portfolio';
@@ -526,6 +527,18 @@ export function ProjectDetailPage() {
             </Fragment>
           ))}
         </Block>
+
+        {detail.scorecard && (
+          <Block>
+            <h2>{detail.scorecard.title}</h2>
+            {detail.scorecard.description?.map((paragraph) => (
+              <p key={paragraph}>
+                <RichText text={paragraph} />
+              </p>
+            ))}
+            <Scorecard data={detail.scorecard} />
+          </Block>
+        )}
 
         {detail.troubleshooting && detail.troubleshooting.length > 0 && (
           <Block>

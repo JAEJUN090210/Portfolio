@@ -39,6 +39,7 @@ export const projects: Project[] = [
         '**어드민 화면 8개 전부** 직접 개발 — 지원자 관리, 1차 합격자 일괄 산출, 수험번호 발급, 전형 통계',
         'CBT·OBT 두 단계 베타 테스트를 운영하며 **원서 데이터 정합성** 문제를 찾아 수정',
         'Sentry 공용 패키지, CSRF 대응, S3·CloudFront → **Cloudflare Workers** 배포 전환',
+        'robots.txt·meta description 정비로 Lighthouse **SEO 83 → 100점**, 어드민 등 4개 앱은 색인 차단',
       ],
       features: [
         { label: '지원자', text: '전형 안내, 모의 성적 계산, 공지·FAQ, 합격 결과 조회' },
@@ -76,11 +77,14 @@ export const projects: Project[] = [
           bullets: ['로그인 만료·결과 미발표·지원 정보 없음 등 **상황별 안내 문구를 분리**'],
         },
         {
-          title: '검색 노출 정책',
-          paragraphs: ['지원자 앱만 검색에 노출하고, 나머지 4개 앱은 색인을 차단했습니다.'],
+          title: '검색 노출 정책 · SEO 개선',
+          paragraphs: [
+            '지원자 앱만 검색에 노출하고, 나머지 4개 앱은 색인을 차단했습니다. Lighthouse로 지원자 앱을 측정해 **SEO 점수를 83점에서 100점으로** 올렸습니다.',
+          ],
           bullets: [
-            '문제: robots.txt가 없어 SPA가 모든 경로에 index.html을 응답해 **어드민까지 크롤링 가능**',
-            '해결: robots.txt · noindex 메타 · 응답 헤더 **세 겹으로 차단**',
+            '문제: robots.txt가 없어 SPA가 모든 경로에 index.html을 응답해 **어드민까지 크롤링 가능**. Lighthouse도 robots.txt 요청에 HTML이 돌아와 **구문 오류 14건**으로 판정',
+            '해결: 실제 robots.txt 파일을 제공하고, 차단할 앱은 robots.txt · noindex 메타 · 응답 헤더 **세 겹으로 차단**',
+            '검색 결과에 보일 **meta description**이 없던 문제를 찾아 지원자 앱에 추가',
           ],
         },
         {
@@ -101,6 +105,24 @@ export const projects: Project[] = [
           ],
         },
       ],
+      scorecard: {
+        title: 'Lighthouse 개선 전후',
+        description: [
+          '지원자 앱(entrydsm.hs.kr)을 Lighthouse 13.3으로 측정한 결과입니다. SEO 항목에서 지적된 robots.txt 구문 오류와 meta description 누락을 고쳐 **SEO 83점 → 100점**을 받았습니다.',
+        ],
+        conditions: ['2026.09.11 · 모바일 에뮬레이션', '2026.09.12 · 데스크톱 에뮬레이션'],
+        items: [
+          { label: 'Performance', before: 61, after: 96 },
+          { label: 'Accessibility', before: 94, after: 94 },
+          { label: 'Best Practices', before: 77, after: 77 },
+          { label: 'SEO', before: 83, after: 100 },
+          { label: 'Agentic Browsing', before: 67, after: 67, display: ['2/3', '2/3'] },
+        ],
+        notes: [
+          '두 측정은 기기 조건이 달라(모바일 → 데스크톱) Performance 차이에는 네트워크·CPU 제한 완화가 포함돼 있습니다. SEO 점수는 기기 조건과 무관합니다.',
+          '남은 과제: 색상 대비(Accessibility), 콘솔 오류·폐기 API 경고(Best Practices), llms.txt 보강(Agentic Browsing)',
+        ],
+      },
       troubleshooting: [
         {
           title: '원서 데이터 정합성',
