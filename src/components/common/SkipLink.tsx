@@ -19,5 +19,5 @@ const Link = styled.a`
 `;
 
 export function SkipLink() {
-  return <Link href="#main-content">Skip to content</Link>;
+  return <Link href="#main-content">본문으로 건너뛰기</Link>;
 }

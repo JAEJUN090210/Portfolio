@@ -35,10 +35,11 @@ const Brand = styled(Link)`
   letter-spacing: -0.02em;
 `;
 
+/* 손가락으로 누르기 쉽도록 40px 이상 확보합니다. */
 const ThemeToggle = styled.button`
   display: inline-grid;
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   place-items: center;
   border: 0;
   border-radius: ${({ theme }) => theme.radii.md};

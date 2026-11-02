@@ -12,6 +12,10 @@ export function App() {
 
   useEffect(() => {
     document.body.classList.toggle('light', mode === 'light');
+    // 모바일 브라우저 상단 바 색을 현재 테마 배경과 맞춥니다.
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', mode === 'light' ? '#ffffff' : '#0a0a0a');
   }, [mode]);
 
   return (

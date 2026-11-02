@@ -1,11 +1,11 @@
 import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
+import { pageMeta } from '../constants/seo';
 import { AppLayout } from '../layouts/AppLayout';
+import { HomePage } from '../pages/HomePage';
 import { PageShell } from './PageShell';
 
-const HomePage = lazy(() =>
-  import('../pages/HomePage').then((module) => ({ default: module.HomePage })),
-);
+// 첫 화면인 홈은 초기 번들에 포함해 추가 요청 없이 바로 그립니다. 나머지 페이지는 방문할 때 불러옵니다.
 const SkillsPage = lazy(() =>
   import('../pages/SkillsPage').then((module) => ({ default: module.SkillsPage })),
 );
@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: (
-          <PageShell title="Home" path="/">
+          <PageShell meta={pageMeta.home}>
             <HomePage />
           </PageShell>
         ),
@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
       {
         path: '/skills',
         element: (
-          <PageShell title="Skills" path="/skills">
+          <PageShell meta={pageMeta.skills}>
             <SkillsPage />
           </PageShell>
         ),
@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
       {
         path: '/projects',
         element: (
-          <PageShell title="Projects" path="/projects">
+          <PageShell meta={pageMeta.projects}>
             <ProjectsPage />
           </PageShell>
         ),
@@ -59,7 +59,8 @@ export const router = createBrowserRouter([
       {
         path: '/projects/:projectId',
         element: (
-          <PageShell title="Project" path="/projects">
+          // 상세 페이지는 프로젝트 데이터를 읽은 뒤 자체 메타로 덮어씁니다.
+          <PageShell meta={pageMeta.projects}>
             <ProjectDetailPage />
           </PageShell>
         ),
@@ -67,7 +68,7 @@ export const router = createBrowserRouter([
       {
         path: '/experience',
         element: (
-          <PageShell title="Experience" path="/experience">
+          <PageShell meta={pageMeta.experience}>
             <ExperiencePage />
           </PageShell>
         ),
@@ -75,7 +76,7 @@ export const router = createBrowserRouter([
       {
         path: '/awards',
         element: (
-          <PageShell title="Awards" path="/awards">
+          <PageShell meta={pageMeta.awards}>
             <AwardsPage />
           </PageShell>
         ),
@@ -83,7 +84,7 @@ export const router = createBrowserRouter([
       {
         path: '/contact',
         element: (
-          <PageShell title="Contact" path="/contact">
+          <PageShell meta={pageMeta.contact}>
             <ContactPage />
           </PageShell>
         ),
@@ -91,7 +92,7 @@ export const router = createBrowserRouter([
       {
         path: '*',
         element: (
-          <PageShell title="Page Not Found" path="/404">
+          <PageShell meta={pageMeta.notFound}>
             <NotFoundPage />
           </PageShell>
         ),

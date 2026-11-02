@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { projects } from '../../constants/portfolio';
 import type { Project } from '../../types/portfolio';
+import { ACCORDION_COVER_SIZES } from '../../utils/image';
 import { RichText } from '../common/RichText';
 import { ProjectCover } from './ProjectCover';
 
@@ -20,6 +21,12 @@ const List = styled.ul`
 
 const Item = styled.li`
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+`;
+
+/** 아코디언 헤딩. 제목 h2(PROJECTS) 아래 프로젝트 이름이 h3 로 읽히도록 버튼을 감쌉니다. */
+const Heading = styled.h3`
+  margin: 0;
+  font: inherit;
 `;
 
 const Toggle = styled.button<{ open: boolean }>`
@@ -218,35 +225,54 @@ const Links = styled.div`
   }
 `;
 
-function ProjectRow({ project, defaultOpen }: { project: Project; defaultOpen: boolean }) {
+type ProjectRowProps = {
+  project: Project;
+  defaultOpen: boolean;
+  /** 첫 화면에 보이는 대표 이미지는 바로 불러옵니다(프로젝트 목록 페이지의 첫 항목). */
+  eagerCover?: boolean;
+};
+
+function ProjectRow({ project, defaultOpen, eagerCover = false }: ProjectRowProps) {
   const [open, setOpen] = useState(defaultOpen);
   const panelId = `panel-${project.id}`;
   const contributions = project.detail.highlights;
 
+  // 닫힌 패널은 inert 로 포커스·보조기기 접근을 함께 막습니다.
+  // aria-hidden 만 쓰면 안의 링크가 여전히 Tab 으로 닿아 접근성 검사에 걸립니다. (React 18 은 inert 를 모르는 속성이라 문자열로 넘깁니다.)
+  const inert = open ? {} : { inert: '' };
+
   return (
     <Item>
-      <Toggle
-        type="button"
-        open={open}
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={() => setOpen((value) => !value)}
-      >
-        <span className="year">{project.period}</span>
-        <span>
-          <span className="title">{project.title}</span>
-          <span className="summary">{project.summary}</span>
-        </span>
-        <span className="plus" aria-hidden="true">
-          +
-        </span>
-      </Toggle>
-      <Panel id={panelId} open={open} aria-hidden={!open}>
+      <Heading>
+        <Toggle
+          type="button"
+          open={open}
+          aria-expanded={open}
+          aria-controls={panelId}
+          onClick={() => setOpen((value) => !value)}
+        >
+          <span className="year">{project.period}</span>
+          <span>
+            <span className="title">{project.title}</span>
+            <span className="summary">{project.summary}</span>
+          </span>
+          <span className="plus" aria-hidden="true">
+            +
+          </span>
+        </Toggle>
+      </Heading>
+      <Panel id={panelId} open={open} {...inert}>
         <div>
           <PanelBody>
             {project.cover && (
               <CoverLink to={`/projects/${project.id}`} aria-label={`${project.title} 상세 보기`}>
-                <ProjectCover src={project.cover} alt={`${project.title} 서비스 화면`} dim={0.4}>
+                <ProjectCover
+                  src={project.cover}
+                  alt={`${project.title} 서비스 화면`}
+                  eager={eagerCover}
+                  dim={0.4}
+                  sizes={ACCORDION_COVER_SIZES}
+                >
                   <span className="label" aria-hidden="true">
                     상세 보기 ↗
                   </span>
@@ -306,13 +332,23 @@ function ProjectRow({ project, defaultOpen }: { project: Project; defaultOpen: b
   );
 }
 
-export function ProjectAccordion() {
+type ProjectAccordionProps = {
+  /** 목록이 페이지 첫 화면에 올 때(/projects) 첫 프로젝트 이미지를 바로 불러옵니다. 홈에서는 화면 아래라 lazy 로 둡니다. */
+  eagerFirstCover?: boolean;
+};
+
+export function ProjectAccordion({ eagerFirstCover = false }: ProjectAccordionProps) {
   return (
     <>
       <Intro>최신순 · 항목을 눌러 역할과 작업 내용을 확인하세요.</Intro>
-      <List>
+      <List aria-label="프로젝트 목록">
         {projects.map((project, index) => (
-          <ProjectRow key={project.id} project={project} defaultOpen={index === 0} />
+          <ProjectRow
+            key={project.id}
+            project={project}
+            defaultOpen={index === 0}
+            eagerCover={eagerFirstCover && index === 0}
+          />
         ))}
       </List>
     </>

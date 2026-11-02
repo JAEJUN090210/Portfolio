@@ -54,7 +54,8 @@ export function AppLayout() {
       <ScrollProgress />
       <Header />
       <SideLabel />
-      <main id="main-content" style={{ minHeight: 'calc(100vh - 13rem)' }}>
+      {/* 본문이 한 화면을 꽉 채우게 해, 페이지 청크를 기다리는 동안 푸터가 첫 화면에 보였다가 밀려나는 레이아웃 이동을 막습니다. */}
+      <main id="main-content" style={{ minHeight: '100svh' }}>
         <Outlet />
       </main>
       <Footer />

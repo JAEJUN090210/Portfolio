@@ -14,6 +14,7 @@ export function GlobalStyles() {
           color-scheme: dark;
           font-family:
             Montserrat,
+            'Pretendard Variable',
             Pretendard,
             -apple-system,
             BlinkMacSystemFont,

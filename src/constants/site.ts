@@ -4,11 +4,14 @@ export const siteConfig = {
   name: '전재준',
   englishName: 'Jaejun Jeon',
   role: 'Frontend Developer',
-  description: '전재준의 포트폴리오 사이트입니다.',
+  description:
+    '대덕소프트웨어마이스터고등학교 프론트엔드 개발자 전재준의 포트폴리오. React·TypeScript 기반 프로젝트(Entry DSM, XQUARE Infra, Commonly)와 경험, 기술 스택, 수상 내역을 소개합니다.',
   email: 'jaejun090210@naver.com',
   githubUrl: 'https://github.com/jaejun090210',
   canonicalUrl: 'https://jaejun.isdevj.kr',
   resumeUrl: '/전재준_포트폴리오.pdf',
+  /** 공유 미리보기(OG) 기본 이미지. 1200×630 */
+  ogImage: '/images/og.jpg',
 };
 
 export const hero = {

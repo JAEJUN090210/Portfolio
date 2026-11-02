@@ -20,7 +20,11 @@ const ToastItem = styled.div<{ tone: string }>`
   gap: ${({ theme }) => theme.spacing[3]};
   border: 1px solid
     ${({ tone, theme }) =>
-      tone === 'danger' ? theme.colors.danger : tone === 'success' ? theme.colors.success : theme.colors.borderStrong};
+      tone === 'danger'
+        ? theme.colors.danger
+        : tone === 'success'
+          ? theme.colors.success
+          : theme.colors.borderStrong};
   border-radius: ${({ theme }) => theme.radii.md};
   padding: ${({ theme }) => theme.spacing[3]} ${({ theme }) => theme.spacing[4]};
   color: ${({ theme }) => theme.colors.text};
@@ -29,6 +33,8 @@ const ToastItem = styled.div<{ tone: string }>`
 
   button {
     display: inline-grid;
+    width: 2rem;
+    height: 2rem;
     place-items: center;
     border: 0;
     color: inherit;
@@ -57,7 +63,7 @@ export function ToastViewport() {
         <ToastItem key={toast.id} tone={toast.tone} role="status">
           <AutoDismissToast id={toast.id} />
           <span>{toast.message}</span>
-          <button type="button" aria-label="Dismiss toast" onClick={() => dismiss(toast.id)}>
+          <button type="button" aria-label="알림 닫기" onClick={() => dismiss(toast.id)}>
             <X size={16} />
           </button>
         </ToastItem>

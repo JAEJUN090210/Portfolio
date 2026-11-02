@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Fragment, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { RichText } from '../components/common/RichText';
 import { SEO } from '../components/common/SEO';
@@ -9,6 +9,7 @@ import { ProjectPreview } from '../components/section/ProjectPreview';
 import { Scorecard } from '../components/section/Scorecard';
 import { Badge, Tag } from '../components/ui/Tag';
 import { projects } from '../constants/portfolio';
+import { pageMeta, projectMeta } from '../constants/seo';
 import type { Project, ProjectTroubleshooting } from '../types/portfolio';
 import { NotFoundPage } from './NotFoundPage';
 
@@ -88,24 +89,33 @@ const GalleryButton = styled.button<{ side: 'left' | 'right' }>`
   }
 `;
 
+/* 점은 작게 보이되 손가락으로 누를 영역은 1.5rem(24px) 이상 확보합니다. */
 const Dots = styled.div`
   position: absolute;
-  bottom: 0.75rem;
+  bottom: 0.25rem;
   left: 50%;
   display: flex;
-  gap: 0.4rem;
   transform: translateX(-50%);
 
   button {
-    width: 0.5rem;
-    height: 0.5rem;
+    display: grid;
+    width: 1.5rem;
+    height: 1.5rem;
+    place-items: center;
     padding: 0;
     border: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.45);
+    background: transparent;
   }
 
-  button[aria-current='true'] {
+  button::before {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.45);
+    content: '';
+  }
+
+  button[aria-current='true']::before {
     background: #ffffff;
   }
 `;
@@ -429,6 +439,7 @@ function ProjectGallery({ project }: { project: Project }) {
 export function ProjectDetailPage() {
   const { projectId } = useParams();
   const project = projects.find((item) => item.id === projectId);
+  const meta = useMemo(() => (project ? projectMeta(project) : pageMeta.notFound), [project]);
 
   if (!project) {
     return <NotFoundPage />;
@@ -447,11 +458,7 @@ export function ProjectDetailPage() {
 
   return (
     <Shell>
-      <SEO
-        title={`${project.title} - ${project.summary}`}
-        description={project.description}
-        path={`/projects/${project.id}`}
-      />
+      <SEO meta={meta} />
       <BackLink to="/#projects">
         <ChevronLeft />
         프로젝트 목록으로

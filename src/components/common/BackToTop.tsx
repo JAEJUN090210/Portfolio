@@ -32,7 +32,8 @@ export function BackToTop() {
       className="no-print"
       visible={visible}
       type="button"
-      aria-label="Back to top"
+      aria-label="맨 위로 이동"
+      title="맨 위로 이동"
       onClick={() => scrollToTarget(0)}
     >
       <ArrowUp size={18} />

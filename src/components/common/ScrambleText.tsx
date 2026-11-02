@@ -53,9 +53,12 @@ export function ScrambleText({ text, stagger = 80, delay = 300, className }: Scr
     return () => window.clearInterval(intervalId);
   }, [delay, playing, stagger, text]);
 
+  // \uc2a4\ud06c\ub9b0\ub9ac\ub354\uc5d0\ub294 \uc6d0\ub798 \ubb38\uc790\uc5f4\ub9cc \uc77d\ud788\uace0, \ub4a4\uc11e\uc774\ub294 \uae30\ud638\ub294 \uc2dc\uac01 \ud6a8\uacfc\ub85c\ub9cc \ub461\ub2c8\ub2e4.
+  // (role \uc5c6\ub294 span \uc758 aria-label \uc740 \ubcf4\uc870\uae30\uae30\uac00 \ubb34\uc2dc\ud558\ubbc0\ub85c sr-only \ud14d\uc2a4\ud2b8\ub97c \uc501\ub2c8\ub2e4.)
   return (
-    <span className={className} aria-label={text}>
-      {display || '\u00a0'}
+    <span className={className}>
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">{display || '\u00a0'}</span>
     </span>
   );
 }

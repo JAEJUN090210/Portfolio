@@ -137,7 +137,8 @@ export function ContactSection() {
         <span className="question">저에 대해 궁금한 점이 있으신가요?</span>
         <span className="welcome">메일은 언제든 환영이에요 :)</span>
       </Lead>
-      <EmailButton type="button" onClick={copyEmail} aria-label="이메일 주소 복사">
+      {/* 접근 가능한 이름에 화면에 보이는 글자(이메일)가 그대로 들어가야 음성 명령으로도 누를 수 있습니다. */}
+      <EmailButton type="button" onClick={copyEmail}>
         <Letters ref={ref} aria-hidden="true">
           {letters.map((letter, index) => (
             <Letter key={`${letter}-${index}`} index={index} visible={isVisible}>
@@ -145,7 +146,7 @@ export function ContactSection() {
             </Letter>
           ))}
         </Letters>
-        <span className="sr-only">{siteConfig.email}</span>
+        <span className="sr-only">{siteConfig.email} 복사</span>
       </EmailButton>
       <Columns>
         <Column>

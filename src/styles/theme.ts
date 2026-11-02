@@ -28,7 +28,8 @@ export const theme = {
     panelSoft: '#1f1f1f',
     text: '#fafafa',
     textMuted: '#a1a1a1',
-    textSubtle: '#737373',
+    /* 작은 글씨(12–13px)에서도 패널(#202020) 위 대비 4.5:1 을 넘기는 값 */
+    textSubtle: '#8a8a8a',
     border: 'rgba(255, 255, 255, 0.1)',
     borderStrong: 'rgba(255, 255, 255, 0.2)',
     accent: '#3b82f6',
@@ -43,8 +44,9 @@ export const theme = {
     panel: '#f5f5f5',
     panelSoft: '#ffffff',
     text: '#0a0a0a',
-    textMuted: '#737373',
-    textSubtle: '#a3a3a3',
+    /* 라이트 모드 패널(#f5f5f5) 위에서도 4.5:1 이상 */
+    textMuted: '#666666',
+    textSubtle: '#6b6b6b',
     border: 'rgba(0, 0, 0, 0.1)',
     borderStrong: 'rgba(0, 0, 0, 0.2)',
     accent: '#2563eb',
@@ -67,7 +69,7 @@ export const theme = {
     lift: '0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3)',
   },
   typography: {
-    sans: 'Montserrat, Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", system-ui, sans-serif',
+    sans: 'Montserrat, "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", system-ui, sans-serif',
     mono: 'ui-monospace, "SFMono-Regular", "Cascadia Code", Menlo, Consolas, monospace',
     serif: 'Georgia, "Times New Roman", "Noto Serif KR", "Apple SD Gothic Neo", serif',
   },
