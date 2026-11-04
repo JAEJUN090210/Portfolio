@@ -332,17 +332,54 @@ function ProjectRow({ project, defaultOpen, eagerCover = false }: ProjectRowProp
   );
 }
 
+const MoreButton = styled.button`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: ${({ theme }) => theme.spacing[2]};
+  padding: ${({ theme }) => theme.spacing[5]} 0;
+  border: 0;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  color: ${({ theme }) => theme.colors.textMuted};
+  background: transparent;
+  font-weight: 600;
+  transition: color 160ms ease;
+
+  .plus {
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: transform 200ms ease;
+  }
+
+  &[aria-expanded='true'] .plus {
+    transform: rotate(45deg);
+  }
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.accent};
+  }
+`;
+
 type ProjectAccordionProps = {
   /** 목록이 페이지 첫 화면에 올 때(/projects) 첫 프로젝트 이미지를 바로 불러옵니다. 홈에서는 화면 아래라 lazy 로 둡니다. */
   eagerFirstCover?: boolean;
+  /** 처음에 보여 줄 프로젝트 수. 나머지는 더보기 버튼으로 펼칩니다. 없으면 전부 보여 줍니다. */
+  initialCount?: number;
 };
 
-export function ProjectAccordion({ eagerFirstCover = false }: ProjectAccordionProps) {
+export function ProjectAccordion({ eagerFirstCover = false, initialCount }: ProjectAccordionProps) {
+  const [expanded, setExpanded] = useState(false);
+  const limit = initialCount ?? projects.length;
+  const visible = expanded ? projects : projects.slice(0, limit);
+  const hiddenCount = projects.length - limit;
+  const listId = 'project-list';
+
   return (
     <>
-      <Intro>최신순 · 항목을 눌러 역할과 작업 내용을 확인하세요.</Intro>
-      <List aria-label="프로젝트 목록">
-        {projects.map((project, index) => (
+      <Intro>주요 프로젝트부터 · 항목을 눌러 역할과 작업 내용을 확인하세요.</Intro>
+      <List id={listId} aria-label="프로젝트 목록">
+        {visible.map((project, index) => (
           <ProjectRow
             key={project.id}
             project={project}
@@ -351,6 +388,19 @@ export function ProjectAccordion({ eagerFirstCover = false }: ProjectAccordionPr
           />
         ))}
       </List>
+      {hiddenCount > 0 && (
+        <MoreButton
+          type="button"
+          aria-expanded={expanded}
+          aria-controls={listId}
+          onClick={() => setExpanded((value) => !value)}
+        >
+          {expanded ? '접기' : `프로젝트 ${hiddenCount}개 더보기`}
+          <span className="plus" aria-hidden="true">
+            +
+          </span>
+        </MoreButton>
+      )}
     </>
   );
 }

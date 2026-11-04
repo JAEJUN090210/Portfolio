@@ -232,7 +232,9 @@ export const projects: Project[] = [
         },
         {
           title: '프론트엔드 설계 · 개발',
-          paragraphs: ['동아리의 **첫 프론트엔드 개발자로 합류**해 설계부터 개발까지 담당했습니다.'],
+          paragraphs: [
+            '동아리의 **첫 프론트엔드 개발자로 합류**해 설계부터 개발까지 담당했습니다.',
+          ],
           bullets: [
             '기술 스택·구조·디자인 시스템 결정, 사용자·관리자 앱과 공통 모듈(UI·hooks·utils)로 모노레포 구성',
             '배포 설정·배포 로그·애드온 생성·팀 관리 화면, 시크릿 표시 토글, 학교 이메일 인증 회원가입 개발',
@@ -351,7 +353,9 @@ export const projects: Project[] = [
           paragraphs: [
             '세 앱이 함께 쓰는 **공통 UI 패키지**를 중심으로 경력증명서 발급, 경력사항 수정, 사용자 등록·삭제, 민원 신청 화면을 만들고 API를 연동했습니다.',
           ],
-          bullets: ['앱마다 달랐던 용어, 버튼 라벨, 여백, 페이지 이동 시 스크롤 위치를 하나로 통일'],
+          bullets: [
+            '앱마다 달랐던 용어, 버튼 라벨, 여백, 페이지 이동 시 스크롤 위치를 하나로 통일',
+          ],
         },
         {
           title: '배포',
@@ -364,6 +368,360 @@ export const projects: Project[] = [
       retrospective: [
         '공무원과 근로자가 쓰는 화면을 디자인하면서, 눈에 띄는 화면보다 **누구나 헷갈리지 않는 용어와 흐름**이 더 중요하다는 걸 느꼈습니다. 세 앱의 용어와 버튼을 하나로 맞추는 작업을 하며, **일관성이 곧 사용성**이고 그래서 공통 UI를 처음부터 잘 정해 두어야 한다는 걸 배웠습니다.',
         '특히 KRDS를 사용하며 기존의 표준에 맞춰 개발하는 과정에 대한 이해도를 높일 수 있었습니다.',
+      ],
+    },
+  },
+  {
+    id: 'uranus-nettools',
+    title: 'Uranus-NetTools',
+    summary: '터미널 하나로 쓰는 크로스플랫폼 네트워크 도구 모음 CLI',
+    description:
+      'Uranus-NetTools(unt)는 핑·트레이스·포트 스캔·DNS·WHOIS 등 네트워크 진단 도구 13개를 한 가지 인터페이스로 묶은 크로스플랫폼 CLI입니다.',
+    role: '개인 프로젝트로 설계부터 개발, 테스트, 플랫폼별 실행 파일 패키징과 배포 자동화까지 전부 맡았습니다.',
+    imageVariant: 'mono',
+    tags: ['TypeScript', 'Node.js', 'Commander', 'esbuild', 'Node SEA', 'Vitest', 'GitHub Actions'],
+    period: '2026.10.12 – 2026.10.20',
+    status: 'v1.0.2 배포',
+    team: '개인 프로젝트',
+    position: '설계 · 개발 · 패키징 · 배포',
+    contribution: '커밋 198 / 198',
+    scale: '명령 13개 · 테스트 파일 69개 · 실행 파일 7종',
+    links: [
+      { label: 'Github', href: 'https://github.com/JAEJUN090210/Uranus-NetTools' },
+      { label: '홈페이지', href: 'https://jaejun090210.github.io/Uranus-NetTools/' },
+    ],
+    detail: {
+      intro: [
+        'Uranus-NetTools(unt)는 핑, 트레이스라우트, 포트 스캔, LAN 호스트 탐색, DNS·WHOIS·GeoIP 조회, HTTP 헤더·TLS 인증서 확인, 로컬 네트워크 정보까지 **네트워크 진단 도구 13개를 한 가지 인터페이스로 묶은** 크로스플랫폼 CLI입니다. 한 번에 실행하는 서브커맨드와 히스토리·탭 완성이 되는 대화형 셸 두 방식을 지원하고, --json 옵션으로 스크립트에서도 쓸 수 있습니다.',
+        'Node.js가 내장된 **단일 실행 파일**로 배포해 따로 설치할 것이 없고, 설치 스크립트·apt 저장소·Homebrew tap으로 Windows·macOS·Linux에 설치할 수 있습니다.',
+      ],
+      highlights: [
+        'raw socket 없이 동작하는 **관리자 권한 불필요** 설계 — 시스템 ping·TCP 핸드셰이크 핑, TCP connect 포트 스캔, ARP 테이블 기반 호스트 탐색',
+        'DNS 와이어 프로토콜·RDAP·WHOIS 클라이언트를 직접 구현하고, Nmap 상위 1000개 포트·IANA 서비스명·OUI 데이터를 빌드 시 생성',
+        'Node SEA(Single Executable Application)로 **OS 3종 × 아키텍처별 실행 파일 7종**을 GitHub Actions 릴리스로 자동 빌드',
+        'SHA256 검증 설치 스크립트, GitHub Pages 위 **apt 저장소**, Homebrew tap, winget 매니페스트까지 배포 채널 구성',
+        'Vitest 테스트 파일 69개, Windows·macOS·Linux CI 매트릭스, husky 커밋 컨벤션 검사',
+      ],
+      features: [
+        {
+          label: '진단',
+          text: '핑(ICMP·TCP), 트레이스라우트(--watch 로 mtr 처럼 홉별 실시간 측정), TCP 포트 연결 확인',
+        },
+        {
+          label: '스캔',
+          text: 'TCP connect 포트 스캔, 서비스 배너 읽기, LAN 호스트 탐색(ICMP·TCP·ARP)',
+        },
+        { label: '조회', text: 'DNS 레코드, WHOIS·RDAP, IP 위치·ASN, HTTP 헤더, TLS 인증서' },
+        {
+          label: '로컬',
+          text: '네트워크 인터페이스, 공인 IP, 기본 게이트웨이, 활성 연결·리스닝 포트',
+        },
+        { label: '셸', text: '탭 완성·히스토리가 있는 대화형 셸, Ctrl+C 로 실행 중인 명령만 취소' },
+      ],
+      sections: [
+        {
+          title: '설계',
+          paragraphs: [
+            '명령(commands)과 실제 동작(core)을 분리해 모든 명령이 **같은 출력 형식(테이블·JSON)과 종료 코드 규칙**을 따르게 했습니다.',
+          ],
+          bullets: [
+            'Commander 기반 서브커맨드와 대화형 셸(REPL)이 같은 명령 정의를 공유',
+            '색상은 TTY가 아니거나 NO_COLOR 가 설정되면 자동으로 꺼짐',
+            '공인 IP 스캔은 확인을 받고, 터미널이 아니면 --yes 없이는 거부해 책임 있는 사용을 기본값으로',
+          ],
+        },
+        {
+          title: '권한 없이 동작하는 네트워크 도구',
+          paragraphs: [
+            'raw socket 을 쓰면 관리자 권한이 필요해, **권한 없이도 되는 방법**을 골라 구현했습니다.',
+          ],
+          bullets: [
+            '핑: 시스템 ping 명령 출력을 OS별로 파싱하고, ICMP가 막힌 곳은 TCP 핸드셰이크 시간으로 대체',
+            '트레이스: tracert·traceroute·tracepath 를 OS에 맞게 호출해 출력 파싱, --watch 는 경로를 한 번 찾은 뒤 홉마다 핑',
+            '스캔: 동시 500개 TCP connect 로 open·closed·filtered 구분, 배너는 서비스 인사말 → HTTP HEAD → TLS 순으로 시도',
+            '탐색: ICMP → 공통 TCP 포트 → OS ARP 테이블 순으로 조용한 호스트까지 찾고 OUI 로 제조사 표시',
+          ],
+        },
+        {
+          title: '패키징·배포 자동화',
+          paragraphs: [
+            'esbuild 로 번들한 뒤 Node SEA 와 postject 로 **플랫폼별 단일 실행 파일**을 만들고, 태그를 올리면 GitHub Actions 가 릴리스를 만듭니다.',
+          ],
+          bullets: [
+            'Windows x64 · macOS arm64/x64 · Linux x64/arm64 실행 파일과 .deb 패키지, SHA256SUMS',
+            'GitHub Pages 에 apt 저장소(서명 키 포함)·설치 스크립트·문서 사이트를 함께 배포',
+            'install.sh · install.ps1 은 OS·CPU 에 맞는 빌드를 받아 체크섬을 검증하고 PATH 까지 설정',
+          ],
+        },
+        {
+          title: '품질',
+          bullets: [
+            'Vitest 테스트 파일 69개: 로컬 DNS 서버·TCP 서버 헬퍼로 네트워크 동작을 실제 소켓으로 검증',
+            'Ubuntu·Windows·macOS 매트릭스 CI, typecheck·lint·prettier·test 를 한 명령(check)으로',
+            'husky commit-msg 훅과 PR 제목 검사 워크플로로 커밋 컨벤션 강제',
+          ],
+        },
+      ],
+      retrospective: [
+        '프론트엔드 밖에서 네트워크 프로토콜(DNS 와이어 포맷, RDAP, TLS)을 직접 다뤄 보며 **표준 문서를 읽고 구현하는 경험**을 쌓았습니다.',
+        '설치 스크립트·apt 저장소·Homebrew 까지 배포 채널을 직접 만들어 보니, 사용자가 설치하는 순간의 경험도 제품의 일부라는 점을 실감했습니다.',
+      ],
+    },
+  },
+  {
+    id: 'uranus-totp',
+    title: 'Uranus-TOTP',
+    summary: '터미널에서 쓰는 2단계 인증 코드(TOTP) 생성기 CLI',
+    description:
+      'Uranus-TOTP(utc)는 Google Authenticator처럼 2단계 인증용 일회용 비밀번호를 터미널에서 만들어 주는 CLI로, 계정은 비밀번호로 암호화된 파일 하나에 보관합니다.',
+    role: '개인 프로젝트로 TOTP 생성과 암호화 저장소, 대화형 셸, 플랫폼별 배포까지 전부 맡았습니다.',
+    imageVariant: 'aurora',
+    tags: [
+      'TypeScript',
+      'Node.js',
+      'Commander',
+      'AES-256-GCM',
+      'scrypt',
+      'Vitest',
+      'GitHub Actions',
+    ],
+    period: '2026.10.21',
+    status: 'v1.0.0 배포',
+    team: '개인 프로젝트',
+    position: '설계 · 개발 · 패키징 · 배포',
+    contribution: '커밋 111 / 111',
+    scale: '명령 12개 · 테스트 파일 32개 · 실행 파일 7종',
+    links: [
+      { label: 'Github', href: 'https://github.com/JAEJUN090210/Uranus-TOTP' },
+      { label: '홈페이지', href: 'https://jaejun090210.github.io/Uranus-TOTP/' },
+    ],
+    detail: {
+      intro: [
+        'Uranus-TOTP(utc)는 Google Authenticator 나 Authy 처럼 2단계 인증(2FA)에 쓰는 **시간 기반 일회용 비밀번호(TOTP)를 터미널에서 생성**하는 크로스플랫폼 CLI입니다. 계정은 네임스페이스로 묶여 비밀번호로 암호화된 파일 하나에 보관됩니다.',
+        'Go 로 만들어진 totp-cli 의 명령 체계를 TypeScript 로 다시 구현했고, Uranus-NetTools 에서 만든 CLI·대화형 셸·패키징 기반을 그대로 재사용했습니다.',
+      ],
+      highlights: [
+        'RFC 6238 TOTP(SHA-1·SHA-256·SHA-512, 자릿수·주기 설정)를 **Node.js crypto 만으로 구현**',
+        '계정 파일은 **AES-256-GCM + scrypt** 로 암호화하고 강도(fast·normal·strong)를 선택, 비밀번호는 어디에도 저장하지 않음',
+        '토큰은 인자로 받지 않고 숨김 입력·환경 변수·표준 입력으로만 받아 **셸 히스토리에 비밀이 남지 않도록** 설계',
+        '대화형 셸은 비밀번호를 한 번만 묻고 5분 미사용 시 자동 잠금, 네임스페이스·계정 이름까지 탭 완성',
+        'NetTools 와 같은 빌드·릴리스 파이프라인으로 OS 3종 실행 파일·apt·Homebrew 배포, 테스트 파일 32개',
+      ],
+      features: [
+        {
+          label: '코드 생성',
+          text: '저장한 계정의 코드 생성(generate, --follow 로 바뀔 때마다 출력), 저장 없이 즉석 생성(instant)',
+        },
+        {
+          label: '계정 관리',
+          text: '추가·목록·이름 변경·옵션 수정·삭제, 네임스페이스 단위 그룹화',
+        },
+        { label: '토큰 옵션', text: '계정별 자릿수, 접두어, HMAC 알고리즘, 유효 시간' },
+        { label: '저장소', text: '비밀번호 변경, JSON 내보내기(dump)·가져오기(import)' },
+      ],
+      sections: [
+        {
+          title: '암호화 저장소',
+          paragraphs: ['모든 계정을 **비밀번호로 암호화된 파일 하나**에 보관합니다.'],
+          bullets: [
+            'scrypt 로 비밀번호에서 키를 유도하고 AES-256-GCM 으로 암호화, 강도 옵션으로 키 유도 비용 선택',
+            '비밀번호는 저장하지 않아 잊으면 복구 불가 — 대신 dump 로 평문 백업을 명시적으로 만들 수 있게',
+            '토큰은 --json 출력이나 list 에서도 절대 보여 주지 않음',
+          ],
+        },
+        {
+          title: '비밀이 새지 않는 입력',
+          bullets: [
+            '토큰·비밀번호는 터미널에서 숨김 입력으로, 파이프에서는 정해진 순서로 표준 입력에서 읽음',
+            'add-token 은 저장 전에 토큰으로 코드를 한 번 만들어 보고 잘못 복사한 토큰을 바로 잡아냄',
+            'instant 는 토큰을 UTC_TOKEN 환경 변수·숨김 질문·표준 입력에서만 받아 인자로는 받지 않음',
+          ],
+        },
+        {
+          title: '대화형 셸',
+          bullets: [
+            '비밀번호는 처음 필요한 명령에서 한 번만 묻고, lock 명령 또는 5분 미사용 시 잊음',
+            '잠금이 풀린 동안에는 네임스페이스·계정 이름까지 탭 완성',
+          ],
+        },
+      ],
+      retrospective: [
+        'NetTools 에서 만든 CLI 기반(명령 정의·REPL·출력·패키징)을 둘째 프로젝트에 그대로 옮겨 보며, **재사용 가능한 구조를 먼저 만들어 두는 것의 가치**를 체감했습니다.',
+        '암호화는 라이브러리를 고르는 일보다 키 유도·저장 경로·백업 같은 운영 결정이 더 어렵다는 점을 배웠습니다.',
+      ],
+    },
+  },
+  {
+    id: 'portfolio',
+    title: '포트폴리오 사이트',
+    summary: '지금 보고 있는 이 사이트 — React·Vite 로 만든 개인 포트폴리오',
+    description:
+      '프로젝트·경험·기술 스택을 소개하는 개인 포트폴리오 사이트로, 라우트별 정적 HTML 생성과 Lighthouse 기반 성능·SEO·접근성 개선을 직접 적용했습니다.',
+    role: '기획·디자인·개발·배포를 혼자 맡았고, 검색 노출과 성능을 실제 서비스 수준으로 맞추며 운영하고 있습니다.',
+    imageVariant: 'studio',
+    tags: [
+      'React 18',
+      'TypeScript',
+      'Vite',
+      'Emotion',
+      'React Router',
+      'Docker',
+      'nginx',
+      'Portainer',
+    ],
+    period: '2026.07.03 – 현재',
+    status: '서비스 중',
+    team: '개인 프로젝트',
+    position: '기획 · 디자인 · Frontend · 배포',
+    links: [
+      { label: 'Github', href: 'https://github.com/JAEJUN090210/Portfolio' },
+      { label: '홈페이지', href: 'https://jaejun.isdevj.kr' },
+    ],
+    detail: {
+      intro: [
+        '지금 보고 있는 이 사이트입니다. 프로젝트·경험·기술 스택·수상 내역을 소개하는 개인 포트폴리오로, 단순한 정적 페이지가 아니라 **검색 노출·성능·접근성을 실제 서비스 수준으로** 맞추는 것을 목표로 만들었습니다.',
+        'Vite + React SPA 지만 빌드 시 라우트별 정적 HTML 을 생성해, JavaScript 를 실행하지 않는 크롤러와 메신저 미리보기도 페이지별 정보를 읽을 수 있습니다.',
+      ],
+      highlights: [
+        '빌드 후 **라우트별 정적 HTML·sitemap 을 생성하는 Vite 플러그인** 직접 작성 — 제목·설명·canonical·OG·JSON-LD 를 페이지마다 채움',
+        'Suspense 스켈레톤 마진 병합으로 생기던 **CLS 0.93 제거**, 대표 이미지 480/960/1440 srcset·preload 로 LCP 개선',
+        '닫힌 아코디언 inert 처리, 헤딩 순서, 터치 영역, 텍스트 대비 등 **접근성 점검 항목 보완**',
+        'Docker 멀티스테이지 빌드 + nginx(try_files·gzip)로 Portainer Stack 배포, 네이버 서치어드바이저·Google 색인 등록',
+        '프로젝트 데이터를 TypeScript 상수로 관리해 목록·상세·SEO·sitemap 이 한 곳의 데이터를 공유',
+      ],
+      features: [
+        {
+          label: '홈',
+          text: '히어로, 프로젝트 아코디언(더보기), 경험 타임라인, 기술 스택, 연락처',
+        },
+        {
+          label: '프로젝트 상세',
+          text: '역할·기여도·주요 기능·트러블슈팅·회고, Lighthouse 개선 전후 비교 카드',
+        },
+        { label: 'SEO', text: '라우트별 정적 HTML, sitemap, OG 이미지, JSON-LD, 404 noindex' },
+        {
+          label: '기타',
+          text: '다크·라이트 테마, 스크롤 위치에 따른 섹션 라벨, PDF 포트폴리오 다운로드',
+        },
+      ],
+      sections: [
+        {
+          title: '정적 HTML 생성 플러그인',
+          paragraphs: [
+            'SSR 프레임워크로 옮기는 대신, 기존 Vite SPA 에 **빌드 후처리 플러그인**을 붙였습니다.',
+          ],
+          bullets: [
+            'seo.ts 의 페이지 메타를 읽어 라우트마다 index.html 을 복제하고 제목·설명·canonical·OG·twitter 메타를 치환',
+            '라우트가 쓰는 스크립트 청크 modulepreload 와 대표 이미지 preload 힌트를 HTML 단계에 삽입',
+            'nginx 의 try_files $uri $uri.html /index.html 로 라우트별 HTML 을 먼저 서빙',
+            '메타 태그를 찾지 못하면 빌드를 실패시켜 index.html 과 어긋나지 않게',
+          ],
+        },
+        {
+          title: '성능·접근성',
+          bullets: [
+            'Lighthouse 로 측정하며 CLS 원인(Suspense 폴백 마진 병합)을 찾아 제거',
+            '웹폰트 비차단 로딩, Montserrat 가변 폰트·Pretendard dynamic subset 으로 교체',
+            'react-icons 기술 로고는 첫 화면 아래라 lazy 청크로 분리',
+            '닫힌 아코디언 패널에 inert 를 줘 숨은 링크가 Tab 에 잡히지 않게',
+          ],
+        },
+        {
+          title: '배포',
+          bullets: [
+            'Dockerfile 멀티스테이지(node 빌드 → nginx:alpine), docker-compose 헬스체크',
+            'Portainer Stack 이 main 브랜치를 보고 빌드·배포',
+          ],
+        },
+      ],
+      retrospective: [
+        '포트폴리오라는 작은 사이트에서도 측정(Lighthouse)과 수정 사이클을 돌려 보니, **숫자로 확인되는 개선**이 가장 설득력 있다는 것을 배웠습니다.',
+        '내용을 자주 고치게 되는 사이트라 데이터와 화면을 분리해 둔 선택이 유지보수에 큰 도움이 됐습니다.',
+      ],
+    },
+  },
+  {
+    id: 'brainps-client',
+    title: '두뇌발전소 홈페이지',
+    summary: '심리·뇌파 검사 업체 두뇌발전소의 홈페이지 리뉴얼 (외주)',
+    description:
+      '심리검사·뇌파검사 서비스를 제공하는 두뇌발전소의 홈페이지를 외주로 새로 만들었습니다. 회사·서비스 소개부터 회원가입, 포트원 결제, 관리자 페이지까지 프론트엔드 전체를 담당했습니다.',
+    role: '외주 프로젝트의 프론트엔드를 혼자 담당해 소개 페이지, 회원·결제, 관리자 페이지까지 전부 개발했습니다.',
+    imageVariant: 'studio',
+    tags: [
+      'React 19',
+      'TypeScript',
+      'Vite',
+      'Emotion',
+      'React Router 7',
+      'React Compiler',
+      'PortOne',
+      'Kakao Maps',
+    ],
+    period: '2026.02 – 2026.04',
+    status: '서비스 중',
+    team: 'Frontend 1명 · Backend 1명',
+    position: '외주 · Frontend 전담',
+    contribution: '커밋 38 / 39',
+    links: [{ label: '홈페이지', href: 'https://brainps.co.kr' }],
+    detail: {
+      intro: [
+        '심리검사·뇌파검사 서비스를 제공하는 **두뇌발전소의 홈페이지를 외주로 새로 만든** 프로젝트입니다. 회사 소개(인사말·연혁·오시는 길), 검사 서비스 4종 소개, 회원가입·로그인, 검사 상품 구매(포트원 결제), 마이페이지, 관리자 페이지까지 프론트엔드 전체를 혼자 담당했습니다.',
+        '2026년 2월부터 4월까지 백엔드 개발자 1명과 함께 진행했고, 현재 brainps.co.kr 에서 운영 중입니다.',
+      ],
+      highlights: [
+        '포트원(PortOne) 브라우저 SDK v2 로 **상품 결제 → 서버 검증 → 결과 안내** 흐름 구현, 모바일 결제 복귀(redirectUrl) 처리',
+        '관리자 페이지: 상품 등록·수정·삭제, **드래그 앤 드롭 정렬**, 판매 상태 토글, 회원 검색·페이지네이션·삭제, 견적 문의',
+        '이메일 인증 코드 회원가입(연령 확인 필수), 로그인·로그아웃·비밀번호 찾기·변경, 역할 기반 관리자 라우트 가드',
+        '카카오맵 오시는 길, 연혁 타임라인, 이용약관·개인정보 처리방침을 시행일자별 파일로 관리',
+        'React 19 + React Compiler 로 수동 메모이제이션 없이 구성, API 호출을 utils·hooks 로 분리',
+      ],
+      features: [
+        {
+          label: '방문자',
+          text: '회사 소개(인사말·연혁·오시는 길), 검사 서비스 4종 소개, 문의·견적 문의',
+        },
+        {
+          label: '회원',
+          text: '이메일 인증 회원가입(연령 확인 필수), 로그인, 비밀번호 찾기·변경, 마이페이지',
+        },
+        { label: '결제', text: '검사 상품 목록, 수량 선택 후 포트원 결제, 서버 결제 검증' },
+        {
+          label: '관리자',
+          text: '상품 관리(등록·수정·삭제·정렬·판매 여부), 회원 관리, 견적 문의 관리',
+        },
+      ],
+      sections: [
+        {
+          title: '결제 흐름',
+          paragraphs: [
+            '상품 페이지에서 수량을 고르면 포트원 결제창을 열고, 성공 응답의 paymentId 를 서버에 보내 **검증이 끝난 뒤에만 완료로 처리**합니다.',
+          ],
+          bullets: [
+            '모바일 결제 수단은 결제 후 페이지가 이동되므로 redirectUrl 복귀 처리를 함께 구현',
+            '검증 응답의 status 가 PAID 가 아니면 실패 다이얼로그로 안내',
+            '상품 조회·결제 검증 API 규격을 README 에 문서화해 백엔드와 계약 공유',
+          ],
+        },
+        {
+          title: '관리자 페이지',
+          bullets: [
+            '상품 카드를 드래그해 노출 순서를 바꾸고 저장(드롭 위치 before/after 계산)',
+            '판매 중·중지 필터, 키워드 검색, 회원 목록 페이지네이션',
+            '관리자 역할 확인 API 로 라우트 가드',
+          ],
+        },
+        {
+          title: '외주 진행',
+          bullets: [
+            '백엔드 개발자 1명과 API 규격을 먼저 합의한 뒤 화면 개발',
+            '환경 변수(.env.example)와 실행 방법을 README 로 문서화해 운영자가 직접 빌드·배포할 수 있게',
+          ],
+        },
+      ],
+      retrospective: [
+        '실제 돈이 오가는 결제를 처음 붙여 보며, 프론트엔드의 성공 응답을 믿지 않고 **서버 검증을 기준으로 삼는** 이유를 몸으로 배웠습니다.',
+        '혼자 프론트엔드 전체를 맡는 외주에서는 코드만큼 문서(README·환경 변수)가 인수인계의 핵심이라는 것을 느꼈습니다.',
       ],
     },
   },

@@ -17,7 +17,7 @@ export function HomePage() {
       <HeroSection />
 
       <SplitSection id="projects" title="PROJECTS">
-        <ProjectAccordion />
+        <ProjectAccordion initialCount={3} />
       </SplitSection>
 
       <SplitSection id="experience" title="EXPERIENCE">
