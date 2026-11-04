@@ -380,7 +380,7 @@ export const projects: Project[] = [
     role: '개인 프로젝트로 설계부터 개발, 테스트, 플랫폼별 실행 파일 패키징과 배포 자동화까지 전부 맡았습니다.',
     imageVariant: 'mono',
     tags: ['TypeScript', 'Node.js', 'Commander', 'esbuild', 'Node SEA', 'Vitest', 'GitHub Actions'],
-    period: '2026.10.12 – 2026.10.20',
+    period: '2026.10.12 – 현재',
     status: 'v1.0.2 배포',
     team: '개인 프로젝트',
     position: '설계 · 개발 · 패키징 · 배포',
@@ -485,7 +485,7 @@ export const projects: Project[] = [
       'Vitest',
       'GitHub Actions',
     ],
-    period: '2026.10.21',
+    period: '2026.10.21 – 현재',
     status: 'v1.0.0 배포',
     team: '개인 프로젝트',
     position: '설계 · 개발 · 패키징 · 배포',
@@ -586,7 +586,8 @@ export const projects: Project[] = [
         '빌드 후 **라우트별 정적 HTML·sitemap 을 생성하는 Vite 플러그인** 직접 작성 — 제목·설명·canonical·OG·JSON-LD 를 페이지마다 채움',
         'Suspense 스켈레톤 마진 병합으로 생기던 **CLS 0.93 제거**, 대표 이미지 480/960/1440 srcset·preload 로 LCP 개선',
         '닫힌 아코디언 inert 처리, 헤딩 순서, 터치 영역, 텍스트 대비 등 **접근성 점검 항목 보완**',
-        'Docker 멀티스테이지 빌드 + nginx(try_files·gzip)로 Portainer Stack 배포, 네이버 서치어드바이저·Google 색인 등록',
+        'Lighthouse(모바일) **Performance 67 → 98, Accessibility 94 → 100, Best Practices 96 → 100**, SEO 100 유지',
+        'Docker 멀티스테이지 빌드 + nginx(try_files·gzip)로 Portainer Stack 배포, 네이버 서치어드바이저 등록',
         '프로젝트 데이터를 TypeScript 상수로 관리해 목록·상세·SEO·sitemap 이 한 곳의 데이터를 공유',
       ],
       features: [
@@ -605,6 +606,18 @@ export const projects: Project[] = [
         },
       ],
       sections: [
+        {
+          title: '검색 노출(SEO)',
+          paragraphs: [
+            'SPA 는 크롤러가 JavaScript 를 실행하지 않으면 빈 페이지로 보입니다. 모든 페이지가 **HTML 만으로도 제목·설명·미리보기를 갖도록** 만들었습니다.',
+          ],
+          bullets: [
+            '라우트별 정적 HTML: 홈·프로젝트 목록·상세·연락처 등 모든 페이지에 제목·설명·canonical·OG·twitter 메타를 빌드 시 채워, 네이버 크롤러와 카카오톡·슬랙 미리보기도 페이지별 정보를 읽음',
+            'sitemap.xml 을 프로젝트 데이터에서 자동 생성 — 홈 섹션과 내용이 겹치는 /experience·/skills·/awards 는 중복 색인을 피하려 제외',
+            'JSON-LD 구조화 데이터: 사이트 전체에 Person·WebSite, 프로젝트 상세에 CreativeWork',
+            '프로젝트별 1200×630 OG 이미지, 404 페이지 noindex, 네이버 서치어드바이저 사이트 등록·소유 확인',
+          ],
+        },
         {
           title: '정적 HTML 생성 플러그인',
           paragraphs: [
@@ -634,6 +647,27 @@ export const projects: Project[] = [
           ],
         },
       ],
+      scorecard: {
+        title: 'Lighthouse 개선 전후',
+        description: [
+          '홈(/)을 로컬 preview 빌드에서 Lighthouse 12 모바일 에뮬레이션으로 측정한 결과입니다. Suspense 폴백 마진 병합으로 생긴 **CLS 0.927 → 0.001**, 대표 이미지 preload·srcset 으로 **LCP 2.8 s → 2.0 s**, 접근성 항목(aria-hidden 안 포커스, 헤딩 순서, 색상 대비)을 고쳐 **Performance 67 → 98, Accessibility 94 → 100, Best Practices 96 → 100**을 받았습니다.',
+          'Lighthouse 의 SEO 점수는 메타 태그와 크롤링 가능 여부만 보는 기본 검사라 개선 전에도 100점이었습니다. 실제 검색 노출을 위한 작업(라우트별 정적 HTML, sitemap, OG·JSON-LD, 네이버 서치어드바이저 등록)은 점수에 잡히지 않아 위 "검색 노출" 섹션에 따로 정리했습니다.',
+        ],
+        conditions: [
+          '2026.10.29 · 개선 전 · 모바일 에뮬레이션',
+          '2026.10.29 · 개선 후 · 모바일 에뮬레이션',
+        ],
+        items: [
+          { label: 'Performance', before: 67, after: 98 },
+          { label: 'Accessibility', before: 94, after: 100 },
+          { label: 'Best Practices', before: 96, after: 100 },
+          { label: 'SEO', before: 100, after: 100 },
+        ],
+        notes: [
+          '프로젝트 상세 페이지도 같은 조건에서 Performance 72 → 91, CLS 0.936 → 0.009 로 개선됐습니다.',
+          'localhost preview 빌드 기준이라 실제 네트워크·CDN 조건과 다를 수 있고, 측정 PC 에 Pretendard 가 설치돼 있어 웹폰트 비용은 실제 방문자보다 낮게 잡힙니다.',
+        ],
+      },
       retrospective: [
         '포트폴리오라는 작은 사이트에서도 측정(Lighthouse)과 수정 사이클을 돌려 보니, **숫자로 확인되는 개선**이 가장 설득력 있다는 것을 배웠습니다.',
         '내용을 자주 고치게 되는 사이트라 데이터와 화면을 분리해 둔 선택이 유지보수에 큰 도움이 됐습니다.',
@@ -663,11 +697,11 @@ export const projects: Project[] = [
     team: 'Frontend 1명 · Backend 1명',
     position: '외주 · Frontend 전담',
     contribution: '커밋 38 / 39',
-    links: [{ label: '홈페이지', href: 'https://brainps.co.kr' }],
+    links: [],
     detail: {
       intro: [
         '심리검사·뇌파검사 서비스를 제공하는 **두뇌발전소의 홈페이지를 외주로 새로 만든** 프로젝트입니다. 회사 소개(인사말·연혁·오시는 길), 검사 서비스 4종 소개, 회원가입·로그인, 검사 상품 구매(포트원 결제), 마이페이지, 관리자 페이지까지 프론트엔드 전체를 혼자 담당했습니다.',
-        '2026년 2월부터 4월까지 백엔드 개발자 1명과 함께 진행했고, 현재 brainps.co.kr 에서 운영 중입니다.',
+        '2026년 2월부터 4월까지 백엔드 개발자 1명과 함께 진행했고, 현재 운영 중입니다.',
       ],
       highlights: [
         '포트원(PortOne) 브라우저 SDK v2 로 **상품 결제 → 서버 검증 → 결과 안내** 흐름 구현, 모바일 결제 복귀(redirectUrl) 처리',

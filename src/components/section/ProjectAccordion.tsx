@@ -332,32 +332,51 @@ function ProjectRow({ project, defaultOpen, eagerCover = false }: ProjectRowProp
   );
 }
 
-const MoreButton = styled.button`
+/** 처음 개수 이후의 프로젝트. 아코디언 패널과 같은 방식으로 높이를 부드럽게 펼칩니다. */
+const MoreList = styled.div<{ open: boolean }>`
+  display: grid;
+  grid-template-rows: ${({ open }) => (open ? '1fr' : '0fr')};
+  opacity: ${({ open }) => (open ? 1 : 0)};
+  visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
+  transition:
+    grid-template-rows 400ms ease,
+    opacity 320ms ease,
+    visibility 0s linear ${({ open }) => (open ? '0s' : '400ms')};
+
+  > ul {
+    min-height: 0;
+    overflow: hidden;
+    border-top: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+`;
+
+const MoreRow = styled.div`
   display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  gap: ${({ theme }) => theme.spacing[2]};
-  padding: ${({ theme }) => theme.spacing[5]} 0;
+  justify-content: flex-end;
+  padding-top: ${({ theme }) => theme.spacing[3]};
+`;
+
+const MoreButton = styled.button`
+  padding: ${({ theme }) => theme.spacing[1]} 0;
   border: 0;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   color: ${({ theme }) => theme.colors.textMuted};
   background: transparent;
+  font-size: 0.875rem;
   font-weight: 600;
-  transition: color 160ms ease;
-
-  .plus {
-    font-size: 1.25rem;
-    line-height: 1;
-    transition: transform 200ms ease;
-  }
-
-  &[aria-expanded='true'] .plus {
-    transform: rotate(45deg);
-  }
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-color: transparent;
+  transition:
+    color 160ms ease,
+    text-decoration-color 160ms ease;
 
   &:hover {
     color: ${({ theme }) => theme.colors.accent};
+    text-decoration-color: currentColor;
   }
 `;
 
@@ -371,14 +390,14 @@ type ProjectAccordionProps = {
 export function ProjectAccordion({ eagerFirstCover = false, initialCount }: ProjectAccordionProps) {
   const [expanded, setExpanded] = useState(false);
   const limit = initialCount ?? projects.length;
-  const visible = expanded ? projects : projects.slice(0, limit);
-  const hiddenCount = projects.length - limit;
-  const listId = 'project-list';
+  const visible = projects.slice(0, limit);
+  const hidden = projects.slice(limit);
+  const moreId = 'project-list-more';
 
   return (
     <>
       <Intro>주요 프로젝트부터 · 항목을 눌러 역할과 작업 내용을 확인하세요.</Intro>
-      <List id={listId} aria-label="프로젝트 목록">
+      <List aria-label="프로젝트 목록">
         {visible.map((project, index) => (
           <ProjectRow
             key={project.id}
@@ -388,18 +407,31 @@ export function ProjectAccordion({ eagerFirstCover = false, initialCount }: Proj
           />
         ))}
       </List>
-      {hiddenCount > 0 && (
-        <MoreButton
-          type="button"
-          aria-expanded={expanded}
-          aria-controls={listId}
-          onClick={() => setExpanded((value) => !value)}
-        >
-          {expanded ? '접기' : `프로젝트 ${hiddenCount}개 더보기`}
-          <span className="plus" aria-hidden="true">
-            +
-          </span>
-        </MoreButton>
+      {hidden.length > 0 && (
+        <>
+          <MoreList open={expanded} aria-hidden={!expanded}>
+            <List id={moreId} aria-label="추가 프로젝트 목록">
+              {hidden.map((project) => (
+                <ProjectRow
+                  key={project.id}
+                  project={project}
+                  defaultOpen={false}
+                  eagerCover={false}
+                />
+              ))}
+            </List>
+          </MoreList>
+          <MoreRow>
+            <MoreButton
+              type="button"
+              aria-expanded={expanded}
+              aria-controls={moreId}
+              onClick={() => setExpanded((value) => !value)}
+            >
+              {expanded ? '접기' : `프로젝트 ${hidden.length}개 더보기`}
+            </MoreButton>
+          </MoreRow>
+        </>
       )}
     </>
   );
