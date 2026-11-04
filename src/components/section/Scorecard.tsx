@@ -27,28 +27,6 @@ const Wrap = styled.div`
   gap: ${({ theme }) => theme.spacing[5]};
 `;
 
-const Legend = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing[4]};
-  color: ${({ theme }) => theme.colors.textMuted};
-  font-size: 0.8125rem;
-
-  span {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  i {
-    width: 0.625rem;
-    height: 0.625rem;
-    border-radius: 50%;
-    background: var(--tone);
-  }
-`;
-
 /**
  * 줄당 카드 수를 1 → 2 → 3으로 늘립니다. 마지막 줄이 덜 찼을 때 가운데 정렬되도록
  * grid 대신 flex-wrap을 씁니다. 카드가 넓어야 링 두 개를 크게 넣을 수 있습니다.
@@ -172,10 +150,12 @@ const Delta = styled.span<{ tone: 'up' | 'flat' }>`
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: ${({ theme, tone }) => (tone === 'up' ? theme.colors.success : theme.colors.textSubtle)};
-  background: ${({ theme, tone }) =>
-    tone === 'up'
-      ? `color-mix(in srgb, ${theme.colors.success} 14%, transparent)`
-      : `color-mix(in srgb, ${theme.colors.textSubtle} 14%, transparent)`};
+  background: transparent;
+  border: 1px solid
+    ${({ theme, tone }) =>
+      tone === 'up'
+        ? `color-mix(in srgb, ${theme.colors.success} 55%, transparent)`
+        : `color-mix(in srgb, ${theme.colors.textSubtle} 55%, transparent)`};
 `;
 
 const Conditions = styled.dl`
@@ -311,21 +291,6 @@ export function Scorecard({ data }: { data: ProjectScorecard }) {
           <ScoreCard key={item.label} item={item} visible={isVisible} />
         ))}
       </Grid>
-
-      <Legend aria-hidden="true">
-        <span style={{ '--tone': 'var(--score-good)' } as CSSProperties}>
-          <i />
-          90–100 양호
-        </span>
-        <span style={{ '--tone': 'var(--score-average)' } as CSSProperties}>
-          <i />
-          50–89 보통
-        </span>
-        <span style={{ '--tone': 'var(--score-poor)' } as CSSProperties}>
-          <i />
-          0–49 미흡
-        </span>
-      </Legend>
 
       <table id={tableId} className="sr-only">
         <caption>{data.title} 점수표</caption>
