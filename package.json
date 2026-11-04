@@ -8,7 +8,8 @@
     "build": "tsc --noEmit && vite build",
     "lint": "eslint .",
     "preview": "vite preview --host 0.0.0.0",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "pdf": "bun scripts/build-pdf.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
