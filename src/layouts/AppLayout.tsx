@@ -11,8 +11,21 @@ import { Footer } from '../components/layout/Footer';
 import { Header } from '../components/layout/Header';
 import { scrollToTarget } from '../lib/smoothScroll';
 
+/** 섹션으로 이동한 뒤 URL에서 해시를 지워, 새로고침하면 다시 그 섹션으로 가지 않고 맨 위에서 시작하게 합니다. */
+function clearHashFromUrl() {
+  const { pathname, search } = window.location;
+  window.history.replaceState(window.history.state, '', pathname + search);
+}
+
 function useHashScroll() {
   const { hash, pathname } = useLocation();
+
+  // 브라우저가 새로고침 시 이전 스크롤 위치를 되살리지 않도록 해, 항상 맨 위에서 시작합니다.
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
 
   useEffect(() => {
     if (!hash) {
@@ -25,6 +38,7 @@ function useHashScroll() {
     const immediateTarget = document.getElementById(id);
     if (immediateTarget) {
       scrollToTarget(immediateTarget);
+      clearHashFromUrl();
       return undefined;
     }
 
@@ -37,6 +51,7 @@ function useHashScroll() {
         if (target) {
           scrollToTarget(target);
         }
+        clearHashFromUrl();
       }
     }, 100);
 
