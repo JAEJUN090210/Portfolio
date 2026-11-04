@@ -16,12 +16,12 @@ export function HomePage() {
     <>
       <HeroSection />
 
-      <SplitSection id="experience" title="EXPERIENCE">
-        <ExperienceList />
-      </SplitSection>
-
       <SplitSection id="projects" title="PROJECTS">
         <ProjectAccordion />
+      </SplitSection>
+
+      <SplitSection id="experience" title="EXPERIENCE">
+        <ExperienceList />
       </SplitSection>
 
       <Section id="skills" title="Technical Skills">

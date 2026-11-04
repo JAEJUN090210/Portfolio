@@ -7,8 +7,8 @@ import { siteConfig } from '../../constants/site';
 /** 홈에서 스크롤 위치에 따라 바뀌는 섹션 라벨. 순서가 곧 번호입니다. */
 const HOME_SECTIONS = [
   { id: 'home', label: 'HERO' },
-  { id: 'experience', label: 'EXPERIENCE' },
   { id: 'projects', label: 'PROJECTS' },
+  { id: 'experience', label: 'EXPERIENCE' },
   { id: 'skills', label: 'SKILLS' },
   { id: 'contact', label: 'CONTACT' },
 ];

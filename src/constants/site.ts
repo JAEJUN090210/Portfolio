@@ -41,18 +41,18 @@ export const footerBio = {
 };
 
 export const headerNav = [
-  { label: '경험', href: '/#experience' },
   { label: '프로젝트', href: '/#projects' },
+  { label: '경험', href: '/#experience' },
   { label: '기술', href: '/#skills' },
   { label: '연락', href: '/#contact' },
 ] as const;
 
 export const sectionAnchors = [
   { id: 'home', label: 'Home' },
+  { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
   { id: 'education', label: 'Education' },
   { id: 'awards', label: 'Awards' },
-  { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
   { id: 'contact', label: 'Contact' },
 ] as const;
