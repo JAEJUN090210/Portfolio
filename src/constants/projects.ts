@@ -126,7 +126,7 @@ export const projects: Project[] = [
       },
       troubleshooting: [
         {
-          title: '원서 데이터 정합성',
+          title: '원서 데이터 정합성 확보',
           situation:
             'CBT 기간에 원서 데이터가 서버와 어긋나는 문제 두 가지를 발견했습니다. 앞 단계를 고친 뒤 주소창이나 뒤로 가기로 미리보기·제출로 넘어가면 **고치기 전 값이 제출**됐고, 출결과 자격증을 저장하면 **둘 중 하나가 사라졌습니다.**',
           cause:
@@ -141,7 +141,7 @@ export const projects: Project[] = [
             '동시 저장 문제는 근본적으로 백엔드가 바뀐 항목만 저장하거나 잠금을 걸어야 해결되는 문제라, 프론트에서 요청 순서를 맞춘 것은 임시 대응에 가깝습니다.',
         },
         {
-          title: 'Sentry 도입',
+          title: 'Sentry 도입을 통한 오류 파악',
           situation:
             '테스트 기간에 버그 제보를 받아 고쳤지만, 지원자 브라우저에서 난 오류는 제보가 없으면 알 수 없었고 재현도 어려웠습니다.',
           solution:
@@ -151,7 +151,7 @@ export const projects: Project[] = [
           result: '오류를 앱·환경·배포 커밋 단위로 나눠 볼 수 있게 됐습니다.',
         },
         {
-          title: 'CSRF 대응',
+          title: 'CSRF 대응 – XSRF-TOKEN 헤더 추가',
           situation:
             '백엔드 게이트웨이에 CSRF 더블서브밋 검사가 들어오면서, JavaScript가 쿠키에서 토큰을 꺼내 헤더에 넣던 기존 방식으로는 변경 요청이 막혔습니다.',
           cause:
@@ -164,7 +164,7 @@ export const projects: Project[] = [
             '액세스 토큰을 JavaScript가 다루지 않게 됐고, 하트비트와 이탈 로그도 CSRF 검사를 통과하게 됐습니다.',
         },
         {
-          title: '배포 전환',
+          title: '배포 전환을 통한 비용 절감',
           situation:
             '처음에는 S3·CloudFront와 GitHub Actions로 배포했습니다. 앱 5개를 운영·스테이징으로 나누니 CloudFront 배포 10개, 240줄짜리 워크플로우, CI에 넣은 AWS 자격 증명까지 관리할 게 많았고, AWS 비용과 계정 관리도 부담이었습니다.',
           solution:
@@ -172,7 +172,7 @@ export const projects: Project[] = [
           decision:
             '스테이징 도메인은 auth.stag.entrydsm.hs.kr이 아니라 stag-auth.entrydsm.hs.kr처럼 한 단계로 두었습니다. 그래야 와일드카드 인증서 한 장과 쿠키 도메인 공유를 그대로 쓸 수 있었습니다.',
           result:
-            'main·develop에 합치면 운영·스테이징에 자동 배포되고 PR마다 프리뷰 URL이 생깁니다. CI에 AWS 자격 증명을 둘 필요도 없어졌습니다.',
+            'main·develop에 합치면 운영·스테이징에 자동 배포되고 PR마다 프리뷰 URL이 생깁니다. CI에 AWS 자격 증명을 둘 필요도 없어졌습니다. 이를 통해 AWS 비용과 계정 관리 부담을 줄였습니다.',
         },
       ],
       retrospective: [
@@ -266,7 +266,7 @@ export const projects: Project[] = [
       ],
       troubleshooting: [
         {
-          title: '학교망 서버 외부 연결',
+          title: '학교망 서버 외부 연결 – WireGuard 릴레이',
           situation:
             '학교망 안의 서버를 외부 도메인으로 서비스하고, 동아리원이 서버에 접속할 수 있어야 했습니다. AWS EC2를 **WireGuard 릴레이**로 두고 80·443 트래픽을 학교 서버의 리버스 프록시로 넘겼고, 터널이 EC2의 기본 경로를 가져가 원격 접속이 끊기지 않도록 정책 라우팅으로 경로를 나눴습니다.',
           problem: '그런데 VPN을 켠 개발자 PC에서 인터넷이 되지 않았습니다.',
@@ -279,7 +279,7 @@ export const projects: Project[] = [
             '외부 도메인에서 학교 서버로 들어오는 경로를 열었고, VPN을 켜도 인터넷이 끊기지 않게 됐습니다.',
         },
         {
-          title: 'PWA 캐시로 새 버전이 전달되지 않는 문제',
+          title: 'PWA 캐시로 새 버전이 전달되지 않는 문제 – PWA 제거',
           situation:
             '2026년 4월 사용자 앱에 PWA(앱 설치·오프라인 지원)를 넣은 뒤, 새 버전을 배포해도 사용자에게 **이전 화면이 보이는 문제**가 생겼습니다.',
           cause:
