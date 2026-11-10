@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { RichText } from '../components/common/RichText';
 import { SEO } from '../components/common/SEO';
 import { ProjectCover } from '../components/section/ProjectCover';
+import { ProjectDiagram } from '../components/section/ProjectDiagram';
 import { ProjectPreview } from '../components/section/ProjectPreview';
 import { Scorecard } from '../components/section/Scorecard';
 import { Badge, Tag } from '../components/ui/Tag';
@@ -518,6 +519,13 @@ export function ProjectDetailPage() {
                 </li>
               ))}
             </Features>
+          </Block>
+        )}
+
+        {detail.diagram && (
+          <Block>
+            <h2>흐름도</h2>
+            <ProjectDiagram data={detail.diagram} />
           </Block>
         )}
 

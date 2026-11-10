@@ -64,11 +64,39 @@ export type ProjectScorecard = {
   notes?: string[];
 };
 
+/** 구성도 칸 하나. `owner` 가 없으면 팀원·외부 서비스 */
+export type DiagramNode = {
+  title: string;
+  description?: string;
+  /** own: 직접 맡음(채운 칸), shared: 함께 개발(점선 칸) */
+  owner?: 'own' | 'shared';
+};
+
+/** 구성도를 위에서 아래로 쌓는 블록 */
+export type DiagramBlock =
+  /** 가로로 이어지는 흐름. `arrows` 가 false 면 화살표 없이 나란히 둡니다. */
+  | { type: 'flow'; label?: string; nodes: DiagramNode[]; arrows?: boolean }
+  /** 테두리로 묶은 영역 안에 칸을 줄 단위로 배치 */
+  | { type: 'group'; title: string; owner?: 'own' | 'shared'; rows: DiagramNode[][] }
+  /** 블록 사이를 잇는 아래 화살표와 설명 */
+  | { type: 'connector'; label: string }
+  /** 왼쪽 주체 → 오른쪽 앱 묶음, 그리고 묶음 전체가 향하는 옆 칸들 */
+  | { type: 'lanes'; lanes: { from: DiagramNode; to: DiagramNode }[]; side: DiagramNode[] };
+
+/** 프로젝트 구성도 */
+export type ProjectDiagram = {
+  /** 구성도 아래 설명 */
+  caption?: string;
+  blocks: DiagramBlock[];
+};
+
 export type ProjectDetail = {
   intro: string[];
   /** 프로젝트 목록(아코디언)에 보여 줄 핵심 기여 3~4줄 */
   highlights: string[];
   features?: ProjectFeature[];
+  /** 서비스 구성도 */
+  diagram?: ProjectDiagram;
   /** 내 역할과 개발 내용 */
   sections: ProjectSection[];
   /** 개선 전후 점수 비교 */

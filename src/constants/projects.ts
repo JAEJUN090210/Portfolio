@@ -55,6 +55,72 @@ export const projects: Project[] = [
         },
         { label: '모니터링', text: '실시간 접속자 수 확인, 오류 모니터링' },
       ],
+      diagram: {
+        caption: '색이 칠해진 칸은 제가 직접 맡은 부분, 점선 칸은 개발에 일부 참여한 부분입니다.',
+        blocks: [
+          {
+            type: 'flow',
+            label: '배포 흐름',
+            nodes: [
+              { title: 'GitHub', description: 'main · develop 브랜치 반영' },
+              {
+                title: 'Workers Builds',
+                description: '앱별 turbo 빌드 · PR 프리뷰 URL',
+                owner: 'own',
+              },
+              {
+                title: 'Cloudflare Workers',
+                description: '앱 5개 × 운영·스테이징 = 10개',
+                owner: 'own',
+              },
+            ],
+          },
+          { type: 'connector', label: '정적 자산 서빙 (SPA)' },
+          {
+            type: 'group',
+            title: 'Turborepo 모노레포 · 저장소 설계',
+            owner: 'own',
+            rows: [
+              [
+                { title: '지원자', description: 'entrydsm.hs.kr · 검색 노출', owner: 'shared' },
+                { title: '인증', description: 'auth. · PASS 본인인증', owner: 'shared' },
+                { title: '원서 작성', description: 'admission. · 작성 · 제출', owner: 'shared' },
+                { title: '어드민', description: 'admin. · 화면 8개 전담', owner: 'own' },
+                { title: '모니터링', description: 'monitor. · 실시간 접속자', owner: 'shared' },
+              ],
+              [
+                {
+                  title: '공통 UI · 디자인',
+                  description: '@entry/ui · @entry/design',
+                  owner: 'shared',
+                },
+                {
+                  title: 'hooks · utils',
+                  description: '공통 로직 · API 유틸 · CSRF 토큰',
+                  owner: 'shared',
+                },
+                {
+                  title: 'observability',
+                  description: 'Sentry 연결 · 개인정보 마스킹',
+                  owner: 'own',
+                },
+              ],
+            ],
+          },
+          { type: 'connector', label: 'API 요청 · 오류 보고' },
+          {
+            type: 'flow',
+            arrows: false,
+            nodes: [
+              {
+                title: '백엔드 API 게이트웨이',
+                description: 'CSRF 더블서브밋 검사 · HttpOnly 쿠키 인증',
+              },
+              { title: 'Sentry', description: '앱 · 환경 · 배포 커밋별 오류 수집' },
+            ],
+          },
+        ],
+      },
       sections: [
         {
           title: '저장소 설계',
@@ -220,6 +286,55 @@ export const projects: Project[] = [
         { label: '자동 배포', text: 'GitHub push 후 이미지 빌드부터 Argo CD 동기화까지 자동 진행' },
         { label: '컨테이너 대여', text: 'Proxmox 기반 컨테이너 제공 (2026.10 –)' },
       ],
+      diagram: {
+        caption: '색이 칠해진 칸이 제가 직접 맡은 부분입니다.',
+        blocks: [
+          {
+            type: 'flow',
+            label: '외부 접속 경로',
+            nodes: [
+              { title: '사용자', description: '학생 · 개발자' },
+              { title: 'Cloudflare', description: '*.dsmhs.kr' },
+              { title: 'AWS EC2', description: 'WireGuard 릴레이 · 80·443 포워딩', owner: 'own' },
+              { title: '학교 Proxmox', description: 'Nginx Proxy Manager', owner: 'own' },
+              { title: 'Kubernetes', description: 'Cilium Gateway' },
+              { title: '학생 프로젝트', description: '60여 개' },
+            ],
+          },
+          {
+            type: 'flow',
+            label: '배포 흐름 (CI/CD)',
+            nodes: [
+              { title: 'GitHub', description: '코드 push' },
+              { title: 'Argo Workflows', description: '이미지 빌드' },
+              { title: 'Harbor', description: '이미지 저장' },
+            ],
+          },
+          { type: 'connector', label: '이미지 태그 기록' },
+          {
+            type: 'flow',
+            nodes: [
+              { title: 'XQUARE 웹', description: '배포 설정 · 로그 · 시크릿', owner: 'own' },
+              { title: 'XQUARE API', description: '설정 반영' },
+              { title: 'GitOps 저장소', description: '프로젝트 설정' },
+              { title: 'Argo CD', description: '자동 동기화' },
+              { title: 'Kubernetes', description: 'Vault 시크릿 · 파드 실행' },
+            ],
+          },
+          {
+            type: 'flow',
+            label: '컨테이너 대여 (2026. 10 ~)',
+            nodes: [
+              { title: '학생', description: '컨테이너 신청 · 문의' },
+              {
+                title: 'Proxmox VE 서버',
+                description: 'OS 설치 · 네트워크·라우팅 설계 · 컨테이너 제공 · 문의 대응',
+                owner: 'own',
+              },
+            ],
+          },
+        ],
+      },
       sections: [
         {
           title: '부장 · PM',
@@ -337,6 +452,76 @@ export const projects: Project[] = [
           text: '4단계로 나눈 경력증명서 발급 흐름(유의사항 확인, 발급 사유, 대상자, 발급 정보), 등록·발급 내역 기록',
         },
       ],
+      diagram: {
+        caption: '색이 칠해진 칸은 제가 직접 맡은 부분, 점선 칸은 함께 개발한 부분입니다.',
+        blocks: [
+          {
+            type: 'flow',
+            nodes: [
+              {
+                title: 'Figma 디자인',
+                description: '세 앱의 화면 전체 · 정부 디자인 시스템(KRDS) 기준',
+                owner: 'own',
+              },
+            ],
+          },
+          { type: 'connector', label: '디자인 적용' },
+          {
+            type: 'lanes',
+            lanes: [
+              {
+                from: { title: '구청 관리자' },
+                to: {
+                  title: '관리자 앱',
+                  description: '사용자 관리 · 업무 이력 조회 · 경력 등록·수정 · 증명서 발급',
+                  owner: 'shared',
+                },
+              },
+              {
+                from: { title: '업무 담당자' },
+                to: {
+                  title: '담당자 앱',
+                  description: '경력 개별 등록 · 엑셀 통합 등록 · 수정 · 증명서 발급',
+                  owner: 'shared',
+                },
+              },
+              {
+                from: { title: '근로자 (민원인)' },
+                to: {
+                  title: '민원 앱',
+                  description: '회원가입 · 본인 확인 · 경력증명서 신청',
+                  owner: 'shared',
+                },
+              },
+            ],
+            side: [
+              {
+                title: '공통 UI 패키지',
+                description: 'KRDS 컴포넌트 · 용어·버튼·여백 통일',
+                owner: 'shared',
+              },
+              { title: '백엔드 API', description: '경력 데이터 · 인증' },
+            ],
+          },
+          {
+            type: 'flow',
+            label: '배포 흐름',
+            nodes: [
+              { title: 'GitHub', description: 'develop → main 병합' },
+              {
+                title: 'Portainer',
+                description: 'main 브랜치를 주기적으로 확인 (Git 폴링)',
+                owner: 'own',
+              },
+              {
+                title: 'Docker Stack',
+                description: '앱 이미지 3개 빌드 · 한 Stack으로 배포',
+                owner: 'own',
+              },
+            ],
+          },
+        ],
+      },
       sections: [
         {
           title: 'PM',
